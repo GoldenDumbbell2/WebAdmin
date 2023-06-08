@@ -33,11 +33,14 @@ public class EmployeeCreateController extends HttpServlet {
     private  final  employeeDAO emdao = new employeeDAO();
     private final ApartmentBlockDAO adao = new ApartmentBlockDAO();
     private java.util.List<ApartmentBlock> listapartment = new ArrayList<>();
-    private List<ApartmentBlock> list = new ArrayList<>();
+        private List<Employee> list = new ArrayList<>();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        listapartment = adao.read();
+        list = emdao.read();
+        request.setAttribute("list", list);
         request.setAttribute("listapartment", listapartment);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/Employee/employeeCreate.jsp");
         rd.forward(request, response);

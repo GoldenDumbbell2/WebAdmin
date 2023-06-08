@@ -122,7 +122,7 @@ public class employeeDAO implements ICrud<String, Employee> {
         try {
             String sql = "update tb_Employee set password=?, fullname=?, identityNumber=? ,AblockID=?  where email=?";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
-            stmt.setString(4, edittedItem.getEmail());
+            stmt.setString(5, edittedItem.getEmail());
             stmt.setString(1, edittedItem.getPassword());
             stmt.setString(2, edittedItem.getFullName());
             stmt.setString(3, edittedItem.getIdentityNumber());
@@ -143,6 +143,27 @@ public class employeeDAO implements ICrud<String, Employee> {
         } catch (SQLException e) {
             Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+    public  List<Employee> search(String search){
+        try {
+            String sql = "select * from tb_Employee where fullname like ?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, search);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                String email = rs.getString("email");
+                String pass = rs.getString("password");
+                String fullname = rs.getString("fullname");    
+                String identity = rs.getString("identityNumber");
+                ApartmentBlock AblockID = Ablock.details(rs.getString("AblockID")); 
+                dm = new Employee(email, fullname, pass, identity ,AblockID);
+                listItems.add(dm);
+            }
+            return listItems;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
 
 }

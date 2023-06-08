@@ -15,6 +15,8 @@ public class History {
     private String historyID ;
     private Date time_In;
     private Date time_Out;
+    private String carPlate;
+    private int amount;
     private Car carID;
 
     public History() {
@@ -25,6 +27,30 @@ public class History {
         this.time_In = time_In;
         this.time_Out = time_Out;
     }
+
+    public History(String historyID, Date time_In, Date time_Out, String carPlate, int amount) {
+        this.historyID = historyID;
+        this.time_In = time_In;
+        this.time_Out = time_Out;
+        this.carPlate = carPlate;
+        this.amount = amount;
+    }
+
+    public History(String historyID, Date time_In, Date time_Out, String carPlate, int amount, Car carID) {
+        this.historyID = historyID;
+        this.time_In = time_In;
+        this.time_Out = time_Out;
+        this.carPlate = carPlate;
+        this.amount = amount;
+        this.carID = carID;
+    }
+
+    public History(String historyID, Date time_In, Date time_Out, String carPlate) {
+        this.historyID = historyID;
+        this.time_In = time_In;
+        this.time_Out = time_Out;
+        this.carPlate = carPlate;
+    }
     
 
     public History(String historyID, Date time_In, Date time_Out, Car carID) {
@@ -32,6 +58,22 @@ public class History {
         this.time_In = time_In;
         this.time_Out = time_Out;
         this.carID = carID;
+    }
+
+    public String getCarPlate() {
+        return carPlate;
+    }
+
+    public void setCarPlate(String carPlate) {
+        this.carPlate = carPlate;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public String getHistoryID() {

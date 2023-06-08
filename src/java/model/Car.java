@@ -21,19 +21,11 @@ public class Car {
     private boolean verifyState1;
     private boolean verifyState2;
     private String securitycode;
-    private Users userID;
+    private Family familyId;
 
     public Car() {
     }
 
-    public Car(String carID, String carName, String carPlate, String carColor, boolean verifyState1, Users userID) {
-        this.carID = carID;
-        this.carName = carName;
-        this.carPlate = carPlate;
-        this.carColor = carColor;
-        this.verifyState1 = verifyState1;
-        this.userID = userID;
-    }
 
     public Car(String carID, String carName, String carPlate, String carColor, String carPaperFront, String carPaperBack, boolean verifyState1, boolean verifyState2) {
         this.carID = carID;
@@ -46,19 +38,7 @@ public class Car {
         this.verifyState2 = verifyState2;
     }
 
-    public Car(String carID, String carName, String carPlate, String carColor, String carPaperFront, String carPaperBack, boolean verifyState1, boolean verifyState2, Users userID) {
-        this.carID = carID;
-        this.carName = carName;
-        this.carPlate = carPlate;
-        this.carColor = carColor;
-        this.carPaperFront = carPaperFront;
-        this.carPaperBack = carPaperBack;
-        this.verifyState1 = verifyState1;
-        this.verifyState2 = verifyState2;
-        this.userID = userID;
-    }
-
-    public Car(String carID, String carName, String carPlate, String carColor, String carPaperFront, String carPaperBack, boolean verifyState1, boolean verifyState2, String securitycode, Users userID) {
+    public Car(String carID, String carName, String carPlate, String carColor, String carPaperFront, String carPaperBack, boolean verifyState1, boolean verifyState2, Family familyId) {
         this.carID = carID;
         this.carName = carName;
         this.carPlate = carPlate;
@@ -68,9 +48,28 @@ public class Car {
         this.verifyState1 = verifyState1;
         this.verifyState2 = verifyState2;
         this.securitycode = securitycode;
-        this.userID = userID;
+        this.familyId = familyId;
     }
 
+    public Car(String carID, String carName, String carPlate, String carColor, boolean verifyState1, boolean verifyState2, Family familyId) {
+        this.carID = carID;
+        this.carName = carName;
+        this.carPlate = carPlate;
+        this.carColor = carColor;
+        this.verifyState1 = verifyState1;
+        this.verifyState2 = verifyState2;
+        this.familyId = familyId;
+    }
+
+ 
+    public Car(String carID, String carName, String carPlate, String carColor) {
+        this.carID = carID;
+        this.carName = carName;
+        this.carPlate = carPlate;
+        this.carColor = carColor;
+    }
+    
+    
     public String getCarID() {
         return carID;
     }
@@ -143,12 +142,12 @@ public class Car {
         this.securitycode = securitycode;
     }
 
-    public Users getUserID() {
-        return userID;
+    public Family getFamilyId() {
+        return familyId;
     }
 
-    public void setUserID(Users userID) {
-        this.userID = userID;
+    public void setFamilyId(Family familyId) {
+        this.familyId = familyId;
     }
 
 

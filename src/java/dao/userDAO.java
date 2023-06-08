@@ -21,12 +21,13 @@ import model.ApartmentBlock;
 import model.Car;
 import model.Employee;
 import model.ApartmentBlock;
+import model.Family;
 import model.Users;
 import util.DBContext;
 
 public class userDAO implements ICrud<String, Users> {
     private DBContext db;
-    ApartmentBlockDAO AblockID;
+    familyDAO familyID;
 
     private List<Users> listItems;
 
@@ -37,21 +38,12 @@ public class userDAO implements ICrud<String, Users> {
     public void setDb(DBContext db) {
         this.db = db;
     }
-    
-    public ApartmentBlockDAO getADao() {
-        return AblockID;
-    }
-
-    public void setADao(ApartmentBlockDAO AblockID) {
-        this.AblockID = this.AblockID;
-    }
-
     Users dm;
 
     public userDAO() {
         listItems = new ArrayList<>();
         db = new DBContext();
-        AblockID = new ApartmentBlockDAO();
+        familyID = new familyDAO();
     }
 
 
@@ -78,14 +70,13 @@ public class userDAO implements ICrud<String, Users> {
             while (rs.next()) {
                 String useID = rs.getString("userID");
                 String email = rs.getString("email");
-                int phoneNo = rs.getInt("phoneNumber");
+                String phoneNo = rs.getString("phoneNumber");
                 String fullname = rs.getString("fullname");
                 String pass = rs.getString("pass");
                 String identitynumber = rs.getString("identitiCard");
-
-                ApartmentBlock apartmentBlock = AblockID.details(rs.getString("AblockID"));
+                Family family = familyID.details(rs.getString("familyId"));
                
-                dm = new Users(useID, email, phoneNo, fullname, pass, identitynumber, apartmentBlock);
+                dm = new Users(useID, email, phoneNo, fullname, pass, identitynumber, family);
                 listItems.add(dm);
             }
             return listItems;
@@ -105,13 +96,13 @@ public class userDAO implements ICrud<String, Users> {
             while (rs.next()) {
                 String useID = rs.getString("userID");
                 String email = rs.getString("email");
-                int phoneNo = rs.getInt("phoneNumber");
+                String phoneNo = rs.getString("phoneNumber");
                 String fullname = rs.getString("fullname");
                 String pass = rs.getString("pass");
                 String identitynumber = rs.getString("identitiCard");
-                ApartmentBlock apartmentBlock = AblockID.details(rs.getString("AblockID"));
+                 Family family = familyID.details(rs.getString("familyId"));
                
-                dm = new Users(useID, email, phoneNo, fullname, pass, identitynumber , apartmentBlock);
+                dm = new Users(useID, email, phoneNo, fullname, pass, identitynumber, family);
 
             }
             return dm;
@@ -124,16 +115,14 @@ public class userDAO implements ICrud<String, Users> {
     @Override
     public void create(Users newUser) {
          try {
-            String sql = "insert into tb_Users(userID, email, phoneNumber, fullname, pass, identitiCard ,  AblockID) values(?, ?, ?, ?, ?, ?, ?)";
+            String sql = "insert into tb_Users(userID, email, phoneNumber, fullname, pass, identitiCard) values(?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             stmt.setString(1, newUser.getUserID());
             stmt.setString(2, newUser.getEmail());
-            stmt.setInt(3, newUser.getPhoneNumber());
+            stmt.setString(3, newUser.getPhoneNumber());
             stmt.setString(4, newUser.getFullName());
             stmt.setString(5, newUser.getPass());
-            stmt.setString(6, newUser.getIdentityNumber());
-            
-            stmt.setString(7, newUser.getAblockID().getAblockID());
+            stmt.setString(6, newUser.getIdentityNumber());        
             stmt.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -143,15 +132,14 @@ public class userDAO implements ICrud<String, Users> {
     @Override
     public void update(Users edittedUser) {
         try {
-            String sql = "update tb_Users set email=?, phoneNumber=?, fullname=?, pass=?, AblockID=?, identitiCard=? where userID=?";
+            String sql = "update tb_Users set email=?, phoneNumber=?, fullname=?, pass=?, identitiCard=? where userID=?";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
-            stmt.setString(7, edittedUser.getUserID());
+            stmt.setString(6, edittedUser.getUserID());
             stmt.setString(1, edittedUser.getEmail());
-            stmt.setInt(2, edittedUser.getPhoneNumber());
+            stmt.setString(2, edittedUser.getPhoneNumber());
             stmt.setString(3, edittedUser.getFullName());
             stmt.setString(4, edittedUser.getPass());
-            stmt.setString(5, edittedUser.getAblockID().getAblockID());
-            stmt.setString(6, edittedUser.getIdentityNumber());
+            stmt.setString(5, edittedUser.getIdentityNumber());
             stmt.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -161,17 +149,39 @@ public class userDAO implements ICrud<String, Users> {
     @Override
     public void delete(String id) {
         try {
-            String sql2 = "update tb_Car set userID=NULL where userID=?";
             String sql = "delete tb_Users where userID=?";
-            PreparedStatement stmt2 = db.getConn().prepareStatement(sql2);   
             PreparedStatement stmt = db.getConn().prepareStatement(sql); 
-            stmt2.setString(1, id);
-            stmt2.executeUpdate();
             stmt.setString(1,id);
             stmt.executeUpdate();   
         } catch (SQLException e) {
             Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+     public List<Users> search(String search) {
+     listItems.clear();
+        try {
+            String sql = "select * from tb_Users where fullname like ?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, search);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String useID = rs.getString("userID");
+                String email = rs.getString("email");
+                String phoneNo = rs.getString("phoneNumber");
+                String fullname = rs.getString("fullname");
+                String pass = rs.getString("pass");
+                String identitynumber = rs.getString("identitiCard");
+                Family family = familyID.details(rs.getString("familyId"));
+               
+                dm = new Users(useID, email, phoneNo, fullname, pass, identitynumber, family);
+                listItems.add(dm);
+            }
+            return listItems;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+
    
 }

@@ -14,15 +14,67 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Customer</title>
-        <link rel="stylesheet" href="adminCss.css" type="text/css">
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     </head>
-    <body>
-        <div id="center">
-        <table border="1">
+    <body><div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="assets/img/logo.png"/>
+                    </a>
+                    
+                </div>
+              
+                <span class="logout-spn" >
+                  <a href="LogoutController" method="POST">LOGOUT</a>  
+
+                </span>
+            </div>
+        </div>
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                
+                    <li>
+                        <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
+                    </li>
+                    <li >
+                        <a href="EmployeeViewController" method="GET"><i class="fa fa-table "></i>Employee Account Table</a>
+                    </li>
+                    <li class="active-link">
+                        <a href="UserviewController" method="GET"><i class="fa fa-table "></i>Customer Account Table</a>
+                    </li>
+                    <li>
+                        <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>
+                    </li>
+                   
+                   
+                </ul>
+                            </div>
+
+        </nav>
+             <div id="page-wrapper" >
+            <div id="page-inner">
+                <form action="UserSearchController" method="GET">
+        <input class="field_class" type="text" name="search" value="" required=""/><button>Search</button>
+                    </form>
+                <div class="row text-center pad-top">
+        <table class="fl-table">
         
             <thead>
                 <tr>
-                    <th>UserID</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Full Name</th>
@@ -42,22 +94,19 @@
                 %>
                 <tr>
                     <td>
-                        <input type="text" name="name" value="<%=x.getUserID()%>" readonly=""/>
+                        <%=x.getEmail()%>
                     </td>
                     <td>
-                        <input type="text" name="name" value="<%=x.getEmail()%>" readonly=""/>
+                       <%=x.getPhoneNumber()%>
                     </td>
                     <td>
-                        <input type="text" name="name" value="<%=x.getPhoneNumber()%>" readonly=""/>
+                      <%=x.getFullName()%>
                     </td>
                     <td>
-                        <input type="text" name="name" value="<%=x.getFullName()%>" readonly=""/>
+                        <%=x.getPass()%>
                     </td>
                     <td>
-                        <input type="text" name="name" value="<%=x.getPass()%>" readonly=""/>
-                    </td>
-                    <td>
-                        <input type="text" name="name" value="<%=x.getIdentityNumber()%>" readonly=""/>
+                        <%=x.getIdentityNumber()%>
                     </td>
                     <td>
                         <a href="UserDeleteController?id=<%=x.getUserID()%>">Delete</a>
@@ -69,9 +118,18 @@
                 <%
                     }
                 %> 
+                       
+
             </tbody>
-            <a href="UserCreateController">Create</a>
-        </table>
-            </div>
-            <body>
+             </table>
+                       <form action="UserCreateController" >
+            <button>Create</button>
+        </form>
+                
+        </main>
+        
+        </div>
+    </div>
+             </div>
+            </body>
 </html>

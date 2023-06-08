@@ -6,6 +6,7 @@
 package controller.car;
 
 import dao.carDAO;
+import dao.familyDAO;
 import dao.userDAO;
 import java.util.List;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Car;
+import model.Family;
 import model.Users;
 /**
  *
@@ -36,16 +38,13 @@ public class CarCreateController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
      private final carDAO cardao = new carDAO();
-    private final userDAO userdao = new userDAO();
-    private java.util.List<Car> listcar = new ArrayList<>();
-    private java.util.List<Users> listuser = new ArrayList<>();
-    private List<Car> list = new ArrayList<>();
+    private final familyDAO familydao = new familyDAO();
+    private java.util.List<Family> listfamily = new ArrayList<>();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         listuser = userdao.read();
-        request.setAttribute("listuser", listuser);
-
+        listfamily = familydao.read();
+        request.setAttribute("listfamily", listfamily);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/Car/carCreate.jsp");
         rd.forward(request, response);
     }
@@ -65,16 +64,16 @@ public class CarCreateController extends HttpServlet {
         String ten = request.getParameter("name");
         String plate = request.getParameter("plate");
         String color = request.getParameter("color");
-        Users user = new Users();
-        for (Users u : listuser) {
-            if (request.getParameter("userID").equals(u.getUserID())) {
-                user = u;
+        Family family = new Family();
+        listfamily = familydao.read();
+        for (Family u : listfamily) {
+            if (request.getParameter("familyID").equals(u.getFamilyID())) {
+                family = u;
             }
-            
         }
         boolean validation = true;
         if(validation){
-        Car cn = new Car(id, plate, plate, color, true, user);
+        Car cn = new Car(id, plate, plate, color, true, false, family);
         cardao.create(cn);
         List<Car> list = cardao.read();
         request.setAttribute("list", list);

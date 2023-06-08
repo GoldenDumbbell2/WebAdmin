@@ -15,17 +15,72 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="adminCss.css" type="text/css">
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     </head>
-    <div id="center">
-    <table border="1">
+    <body>
+   <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="assets/img/logo.png"/>
+                    </a>
+                    
+                </div>
+              
+                
+            </div>
+        </div>
+     <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                
+                    <li>
+                        <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
+                    </li>
+                    <li>
+                        <a href="EmployeeViewController" method="GET"><i class="fa fa-table "></i>Employee Account Table</a>
+                    </li>
+                    <li>
+                        <a href="UserviewController" method="GET"><i class="fa fa-table "></i>Customer Account Table</a>
+                    </li>
+                    <li class="active-link">
+                        <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>
+                    </li>
+                    
+                   
+                </ul>
+                            </div>
+
+        </nav>
+      <div id="page-wrapper" >
+            <div id="page-inner">
+                <form action="CarSearchController" method="GET">
+        <input class="field_class" type="text" name="search" value/><button>Search</button>
+                    </form>
+                <div class="row text-center pad-top">
+    <table class="fl-table" >
             <thead>
                 <tr>
-                    <th>CarID</th>
                     <th>CarName</th>
                     <th>CarPlate</th>
-                    <th>UserID</th>
-                    <th> </th>
+                    <th>CarColr</th>
+                    <th>Family</th>
+                    <th>Verify State 1</th>
+                    <th>Verify State 2</th>
+                    <th>Action </th>
                     
                 </tr>
             </thead>
@@ -39,36 +94,48 @@
                 %>
                 <tr>
                     <td>
-                        <input type="text" name="name" value="<%=x.getCarID()%>" readonly=""/>
+                        <%=x.getCarName()%>
                     </td>
                     <td>
-                        <input type="text" name="name" value="<%=x.getCarName()%>" readonly=""/>
+                       <%=x.getCarPlate()%>
                     </td>
                     <td>
-                        <input type="text" name="name" value="<%=x.getCarPlate()%>" readonly=""/>
+                        <%=x.getCarColor()%>
                     </td>
                     <% Users u = null;
-            String userID;
-                if (x.getUserID() == null) {
-             userID = "null";
+            String familyID;
+                if (x.getFamilyId()== null) {
+             familyID = "null";
             }else{
-               userID = x.getUserID().getUserID();
+               familyID = x.getFamilyId().getFamilyID();
             }
                  %>
                     <td>
-                        <input type="text" name="name" value="<%=(userID)%>" readonly=""/>
+                       <%=(familyID)%>
+                    </td>
+                    <td>
+                       <%=x.isVerifyState1()%>
+                    </td>
+                    <td>
+                       <%=x.isVerifyState2()%>
                     </td>
                     <td>
                         <a href="CarDeleteController?id=<%=x.getCarID()%>">Delete</a>
                         <a href="CarUpdateController?id=<%=x.getCarID()%>">update</a>
                     </td>
-                    
+ 
                 </tr>
                 <%
                     }
                 %> 
             </tbody>
         </table>
-            <a href="CarCreateController" style="size: A4;">Create</a>
+    </main>
+
+            <form action="CarCreateController" >
+            <button>Create</button>
+        </form>
+            
     </div>
+    </body>
 </html>

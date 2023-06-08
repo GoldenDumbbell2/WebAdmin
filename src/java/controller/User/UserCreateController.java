@@ -47,16 +47,11 @@ public class UserCreateController extends HttpServlet {
             throws ServletException, IOException {
         String userID = request.getParameter("userID");
         String email = request.getParameter("email");
-        int phone = Integer.parseInt(request.getParameter("phone"));                
+        String phone = request.getParameter("phone");                
         String fullname = request.getParameter("fullname");
         String pass = request.getParameter("pass");
-        ApartmentBlock ablock = new ApartmentBlock();
-        for (ApartmentBlock a : listaApartmentBlocks) {
-            if (request.getParameter("AblockID").equals(a.getAblockID())) {
-                ablock = a;
-            }
-            
-        }
+        String identity = request.getParameter("identity");
+        
         
          boolean validation = true;
         String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
@@ -77,7 +72,7 @@ public class UserCreateController extends HttpServlet {
         }
  
         if(validation){
-             Users nu = new Users(userID, email, phone, fullname, pass, ablock);
+             Users nu = new Users(userID, email, phone, fullname, pass, identity);
              userdao.create(nu);
              List<Users> list = userdao.read();
              request.setAttribute("list", list);

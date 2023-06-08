@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import model.ApartmentBlock;
 import model.Car;
 import model.History;
-import model.History;
 
 import model.Users;
 import util.DBContext;
@@ -84,7 +83,7 @@ public class historyDAO {
     public List<History> read() {
         listHistory.clear();
         try {
-            String sql = "select * from tb_History";
+            String sql = "select * from tb_History where carPlate IS NULL";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -92,7 +91,9 @@ public class historyDAO {
                 Date timeIn = rs.getDate("time_In");
                 Date timeOut = rs.getDate("time_Out");
                 Car CarId = car.details(rs.getString("carID"));
-                dm = new History(historyID, timeIn, timeOut, CarId);
+                String carPlate = rs.getString("carPlate");
+                int amount = rs.getInt("amount");
+                dm = new History(historyID, timeIn, timeOut, carPlate, amount, CarId);
                 listHistory.add(dm);
         }
             return listHistory;
@@ -101,5 +102,71 @@ public class historyDAO {
         }
         return null;
     }
-
+     public List<History> readOut() {
+        listHistory.clear();
+        try {
+            String sql = "select * from tb_History where carID IS NULL";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String historyID = rs.getString("historyID");
+                Date timeIn = rs.getDate("time_In");
+                Date timeOut = rs.getDate("time_Out");
+                String carPlate = rs.getString("carPlate");
+                int amount = rs.getInt("amount");
+                dm = new History(historyID, timeIn, timeOut, carPlate, amount);
+                listHistory.add(dm);
+        }
+            return listHistory;
+        } catch (SQLException e) {
+            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+     
+     public  List<History> search(String search){
+        try {
+            String sql = "select * from tb_History where carID like ?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, search);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String historyID = rs.getString("historyID");
+                Date timeIn = rs.getDate("time_In");
+                Date timeOut = rs.getDate("time_Out");
+                Car CarId = car.details(rs.getString("carID"));
+                String carPlate = rs.getString("carPlate");
+                int amount = rs.getInt("amount");
+                dm = new History(historyID, timeIn, timeOut, carPlate, amount, CarId);
+                listHistory.add(dm);
+        }
+            return listHistory;
+        } catch (SQLException e) {
+            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+     
+     public  List<History> searchPlate(String search){
+        try {
+            String sql = "select * from tb_History where carPlate like ?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, search);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String historyID = rs.getString("historyID");
+                Date timeIn = rs.getDate("time_In");
+                Date timeOut = rs.getDate("time_Out");
+                Car CarId = car.details(rs.getString("carID"));
+                String carPlate = rs.getString("carPlate");
+                int amount = rs.getInt("amount");
+                dm = new History(historyID, timeIn, timeOut, carPlate, amount, CarId);
+                listHistory.add(dm);
+        }
+            return listHistory;
+        } catch (SQLException e) {
+            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
 }

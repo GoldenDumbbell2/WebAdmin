@@ -12,41 +12,34 @@ package model;
 public class Users {
     private String userID;
     private String email;
-    private int phoneNumber;
+    private String phoneNumber;
     private String fullName;
     private String pass;
     private String identityNumber;
-    private ApartmentBlock AblockID;
+    private Family familyId;
 
     public Users() {
     }
 
-    public Users(String userID, String email, int phoneNumber, String fullName, String pass, String identityNumber,  ApartmentBlock AblockID) {
+    public Users(String userID, String email, String phoneNumber, String fullName, String pass, String identityNumber, Family familyId) {
         this.userID = userID;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.pass = pass;
         this.identityNumber = identityNumber;
-        this.AblockID = AblockID;
+        this.familyId = familyId;
     }
 
-    public Users(String userID, String email, int phoneNumber, String fullName, String pass, ApartmentBlock AblockID) {
+    public Users(String userID, String email, String phoneNumber, String fullName, String pass, String identityNumber) {
         this.userID = userID;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.pass = pass;
-        this.AblockID = AblockID;
-    }
-
-    public String getIdentityNumber() {
-        return identityNumber;
-    }
-
-    public void setIdentityNumber(String identityNumber) {
         this.identityNumber = identityNumber;
     }
+    
 
     public String getUserID() {
         return userID;
@@ -64,11 +57,11 @@ public class Users {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -88,14 +81,22 @@ public class Users {
         this.pass = pass;
     }
 
-    public ApartmentBlock getAblockID() {
-        return AblockID;
+    public String getIdentityNumber() {
+        return identityNumber;
     }
 
-    public void setAblockID(ApartmentBlock AblockID) {
-        this.AblockID = AblockID;
+    public void setIdentityNumber(String identityNumber) {
+        this.identityNumber = identityNumber;
     }
 
+    public Family getFamilyId() {
+        return familyId;
+    }
 
+    public void setFamilyId(Family familyId) {
+        this.familyId = familyId;
+    }
+
+ 
     
 }
