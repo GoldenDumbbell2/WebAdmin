@@ -40,6 +40,7 @@ public class CarCreateController extends HttpServlet {
      private final carDAO cardao = new carDAO();
     private final familyDAO familydao = new familyDAO();
     private java.util.List<Family> listfamily = new ArrayList<>();
+    private java.util.List<Car> listCar = new ArrayList<>();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -60,12 +61,23 @@ public class CarCreateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+
         String ten = request.getParameter("name");
         String plate = request.getParameter("plate");
         String color = request.getParameter("color");
         Family family = new Family();
         listfamily = familydao.read();
+        listCar = cardao.read();
+        
+        int newCarID = 0;
+        for (Car c : listCar) {
+            if(newCarID <= Integer.parseInt(c.getCarID())){
+                newCarID = Integer.parseInt(c.getCarID());
+            }
+            newCarID++;
+        }
+        
+        
         for (Family u : listfamily) {
             if (request.getParameter("familyID").equals(u.getFamilyID())) {
                 family = u;
@@ -73,7 +85,8 @@ public class CarCreateController extends HttpServlet {
         }
         boolean validation = true;
         if(validation){
-        Car cn = new Car(id, plate, plate, color, true, false, family);
+         String id =  Integer.toString(newCarID);
+        Car cn = new Car(id, ten, plate, color, family);
         cardao.create(cn);
         List<Car> list = cardao.read();
         request.setAttribute("list", list);

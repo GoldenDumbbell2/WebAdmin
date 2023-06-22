@@ -6,6 +6,7 @@
 package controller;
 
 import dao.adminDAO;
+import dao.unverifyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -27,6 +28,8 @@ public class LoginController extends HttpServlet {
     
     private final adminDAO dao = new adminDAO();
     private Admin admin;
+    unverifyDAO udao = new unverifyDAO();
+    int noUnverify = 0;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,11 +44,14 @@ public class LoginController extends HttpServlet {
         if (admin != null) {
             HttpSession session = request.getSession();
             session.setAttribute("LOGIN_USER", admin);
+            noUnverify = udao.noUnverify();
+
+            request.setAttribute("noUnverify", Integer.toString(noUnverify));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/admin.jsp");
                 rd.forward(request, response);
             }
          else {
-            request.setAttribute("errorLogin", "Ten dang nhap hoac mat khau khong chinh xac");
+            request.setAttribute("errorLogin", "Incorrect Acount or Password");
             request.getRequestDispatcher("/view/login.jsp").forward(request, response);
         }
     }

@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="model.Car"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     </head>
     <body>
-         
+        <%String i = (String) request.getAttribute("noUnverify");%>
         <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
@@ -71,7 +72,8 @@
                 <div class="row">
                     <div class="col-lg-12 ">
                         <div class="alert alert-info">
-                             <strong>Welcome </strong>
+                            
+                            <strong>Welcome!</strong>
                         </div>
                        
                     </div>
@@ -113,7 +115,8 @@
                       <div class="div-square">
                            <a href="CarUnverifyViewController" method="GET">
  <i class="fa fa-circle-o-notch fa-5x" ></i>
-            <h4>Car Verify State 1</h4>
+            <h5>Car Verify  </h5>
+            <h6 style="color: red"><%out.println(i);%> car unverified!</h6>
                       </a>
                       </div>     
                   </div>
@@ -131,6 +134,14 @@
                            <a href="" method="">
  <i class="fa fa-clipboard fa-5x" ></i>
             <h4>Payment History List</h4>
+                      </a>
+                      </div>     
+                  </div>
+           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                      <div class="div-square">
+                           <a href="BookingViewController" method="GET">
+ <i class="fa fa-clipboard fa-5x" ></i>
+            <h4>Customer Booking List</h4>
                       </a>
                       </div>     
                   </div>

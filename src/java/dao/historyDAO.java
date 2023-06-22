@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -67,11 +68,13 @@ public class historyDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String historyIDs = rs.getString("historyID");
-                Date timeIn = rs.getDate("time_In");
-                Date timeOut = rs.getDate("time_Out");
+                Timestamp timeIn = rs.getTimestamp("time_In");
+                 Timestamp timeOut = rs.getTimestamp("time_Out");
                 Car CarId = car.details(rs.getString("carID"));
+                int amount = rs.getInt("amount");
+                String CarPlate = rs.getString("carPlate");
                 
-                dm = new History(historyIDs, timeIn, timeOut, CarId);
+                dm = new History(historyIDs, timeIn, timeOut, CarPlate, amount, CarId);
 
             }
             return history;
@@ -83,17 +86,16 @@ public class historyDAO {
     public List<History> read() {
         listHistory.clear();
         try {
-            String sql = "select * from tb_History where carPlate IS NULL";
+            String sql = "select * from tb_History where carID IS NOT NULL";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String historyID = rs.getString("historyID");
-                Date timeIn = rs.getDate("time_In");
-                Date timeOut = rs.getDate("time_Out");
+               Timestamp timeIn = rs.getTimestamp("time_In");
+                 Timestamp timeOut = rs.getTimestamp("time_Out");
                 Car CarId = car.details(rs.getString("carID"));
-                String carPlate = rs.getString("carPlate");
                 int amount = rs.getInt("amount");
-                dm = new History(historyID, timeIn, timeOut, carPlate, amount, CarId);
+                dm = new History(historyID, timeIn, timeOut, CarId, amount);
                 listHistory.add(dm);
         }
             return listHistory;
@@ -110,8 +112,8 @@ public class historyDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String historyID = rs.getString("historyID");
-                Date timeIn = rs.getDate("time_In");
-                Date timeOut = rs.getDate("time_Out");
+                Timestamp timeIn = rs.getTimestamp("time_In");
+                 Timestamp timeOut = rs.getTimestamp("time_Out");
                 String carPlate = rs.getString("carPlate");
                 int amount = rs.getInt("amount");
                 dm = new History(historyID, timeIn, timeOut, carPlate, amount);
@@ -126,14 +128,15 @@ public class historyDAO {
      
      public  List<History> search(String search){
         try {
-            String sql = "select * from tb_History where carID like ?";
+            String sql = "select * from tb_History where carID like ? or carPlate like ?";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             stmt.setString(1, search);
+            stmt.setString(2, search);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String historyID = rs.getString("historyID");
-                Date timeIn = rs.getDate("time_In");
-                Date timeOut = rs.getDate("time_Out");
+                Timestamp timeIn = rs.getTimestamp("time_In");
+                 Timestamp timeOut = rs.getTimestamp("time_Out");
                 Car CarId = car.details(rs.getString("carID"));
                 String carPlate = rs.getString("carPlate");
                 int amount = rs.getInt("amount");
@@ -155,8 +158,8 @@ public class historyDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String historyID = rs.getString("historyID");
-                Date timeIn = rs.getDate("time_In");
-                Date timeOut = rs.getDate("time_Out");
+                Timestamp timeIn = rs.getTimestamp("time_In");
+                 Timestamp timeOut = rs.getTimestamp("time_Out");
                 Car CarId = car.details(rs.getString("carID"));
                 String carPlate = rs.getString("carPlate");
                 int amount = rs.getInt("amount");

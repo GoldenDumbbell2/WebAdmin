@@ -24,7 +24,7 @@ import util.DBContext;
  *
  * @author TADAR
  */
-public abstract class spotDAO implements ICrud<String, Spot>{
+public class spotDAO{
 
     
     private DBContext db;
@@ -44,6 +44,7 @@ public abstract class spotDAO implements ICrud<String, Spot>{
     public spotDAO() {
         listSpot = new ArrayList<>();
         db = new DBContext();
+        Ablock = new ApartmentBlockDAO();
     }
 
     public spotDAO(List<Spot> listSpot) {
@@ -57,8 +58,7 @@ public abstract class spotDAO implements ICrud<String, Spot>{
     public void setListSpot(List<Spot> listSpot) {
         this.listSpot = listSpot;
     }
-    
-    @Override
+
     public List<Spot> read() {
        listSpot.clear();
         try {
@@ -66,13 +66,13 @@ public abstract class spotDAO implements ICrud<String, Spot>{
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String spotID = rs.getString("spotID");
+                String spotID = rs.getString("sensorID");
                 boolean available = rs.getBoolean("available");
-                String sensorID = rs.getString("sensorID");
+                String location = rs.getString("location");
                 ApartmentBlock AblockID = Ablock.details(rs.getString("AblockID"));
                
                
-                dm = new Spot(spotID, available, sensorID, AblockID);
+                dm = new Spot(spotID, available, location, AblockID);
                 listSpot.add(dm);
             }
             return listSpot;
@@ -82,20 +82,18 @@ public abstract class spotDAO implements ICrud<String, Spot>{
         return null;
     }
 
-    @Override
     public Spot details(String spotId) {
          try {
-            String sql = "select * from tb_Spot where spotID=?";
+            String sql = "select * from tb_Spot where sensorID=?";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             stmt.setString(1, spotId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String spotID = rs.getString("spotID");
+                String spotID = rs.getString("sensorID");
                 boolean available = rs.getBoolean("available");
-                String sensorID = rs.getString("sensorID");
+                String location = rs.getString("location");
                 ApartmentBlock AblockID = Ablock.details(rs.getString("AblockID"));
-               
-               dm = new Spot(spotID, available, sensorID, AblockID);
+               dm = new Spot(spotID, available, location, AblockID);
 
             }
             return dm;
@@ -103,21 +101,6 @@ public abstract class spotDAO implements ICrud<String, Spot>{
             Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
-    }
-
-    @Override
-    public void update(Spot edittedSpot) {
-        try {
-            String sql = "update tb_Spot(spotID, available, sensorID, AbockID) where spotID=?";
-            PreparedStatement stmt = db.getConn().prepareStatement(sql);
-            stmt.setString(1, edittedSpot.getSpotID());
-            stmt.setBoolean(2, edittedSpot.isAvailable());
-            stmt.setString(3,edittedSpot.getSensorID());
-            stmt.setString(4, edittedSpot.getAblockID().getAblockID());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
     }
 
     

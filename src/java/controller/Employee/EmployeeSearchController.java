@@ -28,9 +28,13 @@ public class EmployeeSearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
             String search = request.getParameter("search");
-        List<Employee> list = dao.search(search);
-        request.setAttribute("list", list);
+        List<Employee> list1 = null ;
+  
+        list1 = dao.search(search);
+        
+        request.setAttribute("list", list1);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/Employee/employeeView.jsp");
         rd.forward(request, response);
     }

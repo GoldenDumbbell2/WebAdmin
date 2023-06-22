@@ -31,10 +31,7 @@
                     
                 </div>
               
-                <span class="logout-spn" >
-                  <a href="LogoutController" method="POST">LOGOUT</a>  
 
-                </span>
             </div>
         </div>
         
@@ -66,7 +63,7 @@
                 <form action="EmployeeSearchController" method="GET">
         <input class="field_class" type="text" name="search" value="" required=""/><button>Search</button>
                     </form>
-                <div class="row text-center pad-top">
+                </br>
                     
         <table class="fl-table">
             <thead>
@@ -74,6 +71,7 @@
                     <th>Email</th>
                     <th>Full Name</th>
                     <th>Pass</th>
+                    <th>Identity</th>
                     <th>Aparment block</th>
                     <th>Acction</th>
                   
@@ -99,6 +97,9 @@
                     </td>
                     <td>
                         <%=x.getPassword()%>
+                    </td>
+                    <td>
+                        <%=(x.getIdentityNumber())%>
                     </td>
                     <td>
                        <%=(x.getAblockID().getAblockName())%>

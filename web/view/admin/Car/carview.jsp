@@ -70,7 +70,7 @@
                 <form action="CarSearchController" method="GET">
         <input class="field_class" type="text" name="search" value/><button>Search</button>
                     </form>
-                <div class="row text-center pad-top">
+                </br>
     <table class="fl-table" >
             <thead>
                 <tr>
@@ -109,12 +109,14 @@
             }else{
                familyID = x.getFamilyId().getFamilyID();
             }
+                String v1;
+                
                  %>
                     <td>
                        <%=(familyID)%>
                     </td>
                     <td>
-                       <%=x.isVerifyState1()%>
+                       <%=(x.isVerifyState1())%>
                     </td>
                     <td>
                        <%=x.isVerifyState2()%>

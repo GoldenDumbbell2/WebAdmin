@@ -29,6 +29,7 @@ public class UserCreateController extends HttpServlet {
     private  ApartmentBlockDAO adao = new ApartmentBlockDAO();
     private  userDAO userdao = new userDAO();
     private java.util.List<ApartmentBlock> listaApartmentBlocks = new ArrayList<>();
+     private java.util.List<Users> listUser = new ArrayList<>();
     public UserCreateController() {
     }
     
@@ -45,7 +46,7 @@ public class UserCreateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userID = request.getParameter("userID");
+       
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");                
         String fullname = request.getParameter("fullname");
@@ -60,17 +61,36 @@ public class UserCreateController extends HttpServlet {
         boolean kt = request.getParameter("phone").matches(reg);
         if (kt == false) {
             validation = false;
-            request.setAttribute("errorPhone", "Pls enter realnumber");
+            request.setAttribute("errorPhone", "Please enter other Number.");
         }
+        
         if (ktmail == false) {
             validation = false;
-            request.setAttribute("errorEmail", "Pls enter email again");
+            request.setAttribute("errorEmail", "Pls enter email again.");
         }
-        if (userdao.details(userID) != null) {
-            validation = false;
-            request.setAttribute("errorId", "ID already exist");
+        
+       
+         listUser = userdao.read();
+         int userIDNo = 0;
+         
+         
+         for (Users u : listUser) {
+            if(userIDNo <= Integer.parseInt(u.getUserID())){
+                userIDNo = Integer.parseInt(u.getUserID());
+                userIDNo++;
+            }
+            if(u.getPhoneNumber().equals(phone)){
+                validation = false;
+                request.setAttribute("errorPhoneEx", "This phone number already been used!");
+            }
+            if(u.getEmail().equals(email)){
+                 validation = false;
+                request.setAttribute("errorEmailEx", "This Email already been used!");
+            }
         }
- 
+           String userID = Integer.toString(userIDNo);
+           
+     
         if(validation){
              Users nu = new Users(userID, email, phone, fullname, pass, identity);
              userdao.create(nu);

@@ -61,30 +61,66 @@
                             </div>
 
         </nav>
+             <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
             <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row text-center pad-top">
-        <main>
+               
+        
             
-             <form id="login_form" class="form_class" action="EmployeeUpdateController" method="POST">
+             <form action="EmployeeUpdateController" method="POST">
             <div class="form_div">
+            <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
                             <%Employee c = (Employee) request.getAttribute("employee");%>
-            <label>Email</label><input class="field_class" type="text" name="email" value="<%out.println(c.getEmail());%>" required=""/>${errorEmail}</br>
-            <label>Fullname</label> <input class="field_class" type="text" name="fullname" value="<%out.println(c.getFullName());%>" required=""/></br>
-            <label>Password</label> <input class="field_class" type="text" name="password" value="<%out.println(c.getPassword());%>"  required=""/> </br>
-            <label>Identity Number</label> <input class="field_class" type="text" name="identityNumber" value="<%out.println(c.getIdentityNumber());%>" required=""/> </br>
+            <label>Email</label><input  type="text" name="email" value="<%out.println(c.getEmail());%>" required=""/>${errorEmail}</br>
+            <label>Fullname</label> <input type="text" name="fullname" value="<%out.println(c.getFullName());%>" required=""/></br>
+            <label>Password</label> <input type="text" name="password" value="<%out.println(c.getPassword());%>"  required=""/> </br>
+            <label>Identity Number</label> <input type="text" name="identityNumber" value="<%out.println(c.getIdentityNumber());%>" required=""/> </br>
             <label>Current Apartment block </label>
             <select name="AblockID">
                 <c:forEach var="item" items="${listapartment}">
-                    <option value="${item.getAblockID()}">${item.getAblockID()}</option>
+                    <option value="${item.getAblockID()}">${item.getAblockName()}</option>
                 </c:forEach>
             </select>
             <input type="submit" name="action" value="Update"/>
             </div>
+            </div>
+            </div>
+            </div>
         
              </form>
                 
-                </main>
+               
             <table class="fl-table">
                 
                 <thead>

@@ -62,7 +62,7 @@ public class carDAO  implements ICrud<String, Car> {
     public List<Car> read(){
         listItems.clear();
         try {
-            String sql = "select * from tb_Car";
+            String sql = "select * from tb_Car  where verifyState1 is not null and verifyState2 is not null ";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -81,39 +81,6 @@ public class carDAO  implements ICrud<String, Car> {
                 dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
                 }
                 listItems.add(dm);
-            }
-            return listItems;
-        } catch (SQLException e) {
-            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return null;
-    }
-
-
-     public List<Car> readUnverify(){
-        listItems.clear();
-        try {
-            String sql = "select * from tb_Car where verifyState1=?";
-            PreparedStatement stmt = db.getConn().prepareStatement(sql);
-             stmt.setString(1, "FALSE");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String carID = rs.getString("carID");
-                String carname = rs.getString("carName");
-                String carPlate = rs.getString("carPlate");
-                String carColor = rs.getString("carColor");
-                String carPaperFront = rs.getString("carPaperFront");
-                String carPaperBack = rs.getString("carPaperBack");
-                boolean verifyState1 = rs.getBoolean("verifyState1");
-                boolean verifyState2 = rs.getBoolean("verifyState2");
-                Family family = familyDAO.details(rs.getString("familyId"));
-                if (family == null) {
-                    dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
-                }else{
-                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
-                }
-                
-                
             }
             return listItems;
         } catch (SQLException e) {
@@ -156,7 +123,7 @@ public class carDAO  implements ICrud<String, Car> {
     @Override
     public void create(Car newItem) {
         try {
-            String sql = "insert into tb_Car(carID, carName, carPlate, carColor, verifyState1, verifyState2, familyId) values(?, ?, ?, ?, ?, ?)";
+            String sql = "insert into tb_Car(carID, carName, carPlate, carColor, familyId) values(?, ?, ?, ?, ?)";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
                        
 
@@ -164,9 +131,7 @@ public class carDAO  implements ICrud<String, Car> {
             stmt.setString(2, newItem.getCarName());
             stmt.setString(3, newItem.getCarPlate());
             stmt.setString(4, newItem.getCarColor());
-            stmt.setBoolean(5, newItem.isVerifyState1());
-            stmt.setBoolean(6, newItem.isVerifyState2());
-            stmt.setString(7, newItem.getFamilyId().getFamilyID());
+            stmt.setString(5, newItem.getFamilyId().getFamilyID());
             stmt.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -182,7 +147,8 @@ public class carDAO  implements ICrud<String, Car> {
             stmt.setString(1, edittedItem.getCarName());
             stmt.setString(2, edittedItem.getCarPlate());
             stmt.setString(3, edittedItem.getCarColor());
-            stmt.setString(4, "False");
+            stmt.setString(4, "1");
+            
            
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -231,6 +197,26 @@ public class carDAO  implements ICrud<String, Car> {
             Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
+    }
+     public void verify(String CarID) {
+        try {
+            String sql = "update tb_Car set verifyState1=1 where carID=?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, CarID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+     public void verifydenied(String CarID) {
+        try {
+            String sql = "update tb_Car set verifyState1=0 where carID=?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, CarID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
 }

@@ -40,10 +40,7 @@
                     
                 </div>
               
-                <span class="logout-spn" >
-                  <a href="LogoutController" method="POST">LOGOUT</a>  
-
-                </span>
+               
             </div>
         </div>
         
@@ -56,10 +53,10 @@
                         <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
                     </li>
                     <li>
-                        <a href="HistoryController" ><i class="fa fa-desktop "></i>Resident's History </a>
+                        <a href="HistoryController" ><i class="fa fa-table "></i>Resident's History </a>
                     </li>
                     <li class="active-link">
-                        <a href="HistoryOutSideCarController" ><i class="fa fa-desktop "></i>Foreigner's History </a>
+                        <a href="HistoryOutSideCarController" ><i class="fa fa-table "></i>Foreigner's History </a>
                     </li>
                     
                 </ul>
@@ -78,7 +75,7 @@
     <table class="fl-table">
             <thead>
                 <tr>
-                    <th>Id</th>
+
                     <th>Car Plate</th>
                     <th>TimeIn</th>
                     <th>TimeOut</th>
@@ -89,7 +86,7 @@
                 <%
                     List<History> ds = (ArrayList<History>) request.getAttribute("listHistory");
                 // Setting the pattern
-                   SimpleDateFormat simpleformat = new SimpleDateFormat("MMMM dd /yyyy, h:m:s");
+                   SimpleDateFormat simpleformat = new SimpleDateFormat("MMMM dd /yyyy, hh:mm:ss");
 
                 %>
 
@@ -98,9 +95,7 @@
                                        
                 %>
                 <tr>
-                    <td>
-                        <%=x.getHistoryID()%>
-                    </td>
+
                     <td>
                        <%=(x.getCarPlate())%>
                     </td>

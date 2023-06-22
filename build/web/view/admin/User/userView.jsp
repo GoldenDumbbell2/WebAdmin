@@ -37,10 +37,7 @@
                     
                 </div>
               
-                <span class="logout-spn" >
-                  <a href="LogoutController" method="POST">LOGOUT</a>  
-
-                </span>
+             
             </div>
         </div>
         <nav class="navbar-default navbar-side" role="navigation">
@@ -70,7 +67,7 @@
                 <form action="UserSearchController" method="GET">
         <input class="field_class" type="text" name="search" value="" required=""/><button>Search</button>
                     </form>
-                <div class="row text-center pad-top">
+               </br>
         <table class="fl-table">
         
             <thead>

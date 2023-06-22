@@ -96,7 +96,7 @@ public class familyDAO {
                 String familyName = rs.getString("familyName");
                 ApartmentBlock apartmentBlock = AblockID.details(rs.getString("AblockID"));
                
-                dm = new Family(familyID, familyName, apartmentBlock);
+                dm = new Family(familyI, familyName, apartmentBlock);
 
             }
             return dm;

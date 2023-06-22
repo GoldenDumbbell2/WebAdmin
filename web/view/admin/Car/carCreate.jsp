@@ -61,16 +61,50 @@
                             </div>
 
         </nav>
+            
+            <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
             <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row text-center pad-top">
-        <main>
-    <form id="login_form" class="form_class" action="CarCreateController" method="POST">
+               
+        
+    <form  action="CarCreateController" method="POST">
        <div class="form_div">
-        <label> CarID: </label><input class="field_class" type="text" name="id" required=""/> </br>
-        <label>  Car Name: </label> <input class="field_class" type="text" name="name" required=""/></br>
-        <label>  Car Plate:</label> <input class="field_class" type="text" name="plate" required=""/></br>
-        <label>  Car Color:</label> <input class="field_class" type="text" name="color" required=""/></br>
+            <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
+        
+        <label>  Car Name: </label> <input  type="text" name="name" required=""/></br>
+        <label>  Car Plate:</label> <input type="text" name="plate" required=""/></br>
+        <label>  Car Color:</label> <input type="text" name="color" required=""/></br>
            
           <label>Family</label> <select name="familyID">
                 <option value = "NULL"></option>
@@ -79,8 +113,12 @@
                 </c:forEach>
             </select>
           </div>
+          </div>
+          </div>
+          </div>
             <input type="submit" name="action" value="Create"/></br>
         </form>
-            </main>
+           </div>
+           </div>
     </body>
 </html>

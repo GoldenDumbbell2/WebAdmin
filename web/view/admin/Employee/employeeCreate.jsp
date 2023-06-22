@@ -22,6 +22,36 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     </head>
+    <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
     <body>
         <main>
         <div id="wrapper">
@@ -63,56 +93,35 @@
         </nav>
             <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row text-center pad-top">
-        <main>
-            
-            <form id="login_form" class="form_class" action="EmployeeCreateController" method="POST">
-            <div class="form_div">
-            <label>email</label><input class="field_class" type="text" name="email" required=""/>${errorEmail}</br>
-            <label>fullname</label> <input class="field_class" type="text" name="fullname" required=""/></br>
-            <label>password</label> <input class="field_class" type="text" name="pass" required=""/> </br>
-            <label>Identity Number</label> <input class="field_class" type="text" name="identityNumber" required=""/> </br>
+                
+        
+             <div class="form_div">
+            <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
+            <form action="EmployeeCreateController" method="POST">
+            <label>Email:</label><input type="text" name="email" required=""/>${errorEmail}</br>
+            <label>Fullname:</label> <input  type="text" name="fullname" required=""/></br>
+            <label>Password:</label> <input type="text" name="pass" required=""/> </br>
+            <label>Identity Number:</label> <input type="text" name="identityNumber" required=""/> </br>
             <label>Current apartment block :</label>
             <select name="AblockID">
                 <c:forEach var="item" items="${listapartment}">
-                    <option value="${item.getAblockID()}">${item.getAblockID()}</option>
+                    <option value="${item.getAblockID()}">${(item.getAblockName())}</option>
                 </c:forEach>
             </select>
             <input type="submit" name="action" value="Create"/>
+           
             </div>
+            </div>
+            </div>
+            </div>
+            
+            
         </form>
-                        </main>
+                       
 
-            <table class="fl-table">
-                
-                <thead>
-                    <tr>
-                    <th>Apartment Block ID</th>
-                    <th>Apartment Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <%
-                    List<ApartmentBlock> ds = (ArrayList<ApartmentBlock>) request.getAttribute("listapartment");
-                %>
-
-                <%
-                    for (ApartmentBlock x : ds) {
-                %>     
-                    <tr>
-                    <td>
-                        <%=x.getAblockID()%>
-                    </td>
-                    <td>
-                        <%=x.getAblockName()%>
-                    </td>
-                    </tr>
-                
-                <%
-                    }
-                %>
-           </tbody>
-            </table>
+           
         
                 </div>
             </div>

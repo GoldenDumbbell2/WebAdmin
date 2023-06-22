@@ -18,6 +18,36 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         
     </head>
+    <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
     <body>
         <header>
             <h1>Customer Account Creating </h1>
@@ -38,10 +68,7 @@
                     
                 </div>
               
-                <span class="logout-spn" >
-                  <a href="LogoutController" method="POST">LOGOUT</a>  
-
-                </span>
+               
             </div>
         </div>
             
@@ -65,22 +92,31 @@
         </nav>
             <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row text-center pad-top">
-                    <main>
-            <form id="login_form" class="form_class" action="UserCreateController" method="POST">
+                
+                   
+                       
+            <form action="UserCreateController" method="POST">
             <div class="form_div">
+            <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
          
-            <label>ID:</label><input class="field_class" type="text" name="userID" required=""/> </br>
-            <label>Email:</label><input class="field_class" type="text" name="email" required=""/>${errorEmail}</br>
-            <label>Phone:</label> <input class="field_class" type="text" name="phone" required=""/> ${errorPhone}</br>
-            <label>Full Name:</label> <input class="field_class" type="text" name="fullname" required=""/></br>
-            <label>Password:</label> <input class="field_class" type="text" name="pass" required=""/> </br>
-            <label>Identity Number:</label> <input class="field_class" type="text" name="identity" required=""/> </br>
+            <label>Email:</label><input type="text" name="email" required=""/><br>${errorEmail}${errorEmailEx}</br>
+            <label>Phone:</label> <input type="text" name="phone" required=""/><br> ${errorPhone}${errorPhoneEx}</br>
+            <label>Full Name:</label> <input  type="text" name="fullname" required=""/></br>
+            <label>Password:</label> <input type="text" name="pass" required=""/> </br>
+            <label>Identity Number:</label> <input  type="text" name="identity" required=""/> </br>
         
             <input type="submit" name="action" value="Create"/>
+            
+            </div>
+            </div>
             </div>
         </form>
-        <br>${errorLogin}</br>
+        
+        
+        </div>
+        </div>
         </main>
     </body>
 </html>

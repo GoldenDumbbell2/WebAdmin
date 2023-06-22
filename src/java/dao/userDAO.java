@@ -160,9 +160,11 @@ public class userDAO implements ICrud<String, Users> {
      public List<Users> search(String search) {
      listItems.clear();
         try {
-            String sql = "select * from tb_Users where fullname like ?";
+            String sql = "select * from tb_Users where fullname like ? or email like ? or phoneNumber like ?";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             stmt.setString(1, search);
+            stmt.setString(2, search);
+            stmt.setString(3, search);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String useID = rs.getString("userID");

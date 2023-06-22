@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,8 +14,8 @@ import java.sql.Date;
  */
 public class History {
     private String historyID ;
-    private Date time_In;
-    private Date time_Out;
+    private Timestamp time_In;
+    private Timestamp time_Out;
     private String carPlate;
     private int amount;
     private Car carID;
@@ -22,13 +23,13 @@ public class History {
     public History() {
     }
 
-    public History(String historyID, Date time_In, Date time_Out) {
+    public History(String historyID, Timestamp time_In, Timestamp time_Out) {
         this.historyID = historyID;
         this.time_In = time_In;
         this.time_Out = time_Out;
     }
 
-    public History(String historyID, Date time_In, Date time_Out, String carPlate, int amount) {
+    public History(String historyID, Timestamp time_In, Timestamp time_Out, String carPlate, int amount) {
         this.historyID = historyID;
         this.time_In = time_In;
         this.time_Out = time_Out;
@@ -36,7 +37,15 @@ public class History {
         this.amount = amount;
     }
 
-    public History(String historyID, Date time_In, Date time_Out, String carPlate, int amount, Car carID) {
+    public History(String historyID, Timestamp time_In, Timestamp time_Out, Car carID,int amount) {
+        this.historyID = historyID;
+        this.time_In = time_In;
+        this.time_Out = time_Out;
+        this.carID = carID;
+        this.amount =amount;
+    }
+
+    public History(String historyID, Timestamp time_In, Timestamp time_Out, String carPlate, int amount, Car carID) {
         this.historyID = historyID;
         this.time_In = time_In;
         this.time_Out = time_Out;
@@ -45,21 +54,12 @@ public class History {
         this.carID = carID;
     }
 
-    public History(String historyID, Date time_In, Date time_Out, String carPlate) {
-        this.historyID = historyID;
-        this.time_In = time_In;
-        this.time_Out = time_Out;
-        this.carPlate = carPlate;
-    }
+
+
+
     
 
-    public History(String historyID, Date time_In, Date time_Out, Car carID) {
-        this.historyID = historyID;
-        this.time_In = time_In;
-        this.time_Out = time_Out;
-        this.carID = carID;
-    }
-
+  
     public String getCarPlate() {
         return carPlate;
     }
@@ -84,22 +84,21 @@ public class History {
         this.historyID = historyID;
     }
 
-    public Date getTime_In() {
+    public Timestamp getTime_In() {
         return time_In;
     }
 
-    public void setTime_In(Date time_In) {
+    public void setTime_In(Timestamp time_In) {
         this.time_In = time_In;
     }
 
-    public Date getTime_Out() {
+    public Timestamp getTime_Out() {
         return time_Out;
     }
 
-    public void setTime_Out(Date time_Out) {
+    public void setTime_Out(Timestamp time_Out) {
         this.time_Out = time_Out;
     }
-
 
     public Car getCarID() {
         return carID;

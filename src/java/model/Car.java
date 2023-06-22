@@ -47,7 +47,6 @@ public class Car {
         this.carPaperBack = carPaperBack;
         this.verifyState1 = verifyState1;
         this.verifyState2 = verifyState2;
-        this.securitycode = securitycode;
         this.familyId = familyId;
     }
 
@@ -67,6 +66,14 @@ public class Car {
         this.carName = carName;
         this.carPlate = carPlate;
         this.carColor = carColor;
+    }
+
+    public Car(String carID, String carName, String carPlate, String carColor, Family familyId) {
+        this.carID = carID;
+        this.carName = carName;
+        this.carPlate = carPlate;
+        this.carColor = carColor;
+        this.familyId = familyId;
     }
     
     

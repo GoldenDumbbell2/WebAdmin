@@ -59,23 +59,58 @@
                             </div>
 
         </nav>
+            
+             <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
             <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row text-center pad-top">
-        <main>
+                
+        
             
-            <form id="login_form" class="form_class" action="UserUpdateController" method="POST">
+            <form  action="UserUpdateController" method="POST">
             <div class="form_div">
-
+            <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
            <%Users u = (Users) request.getAttribute("user");%>
-            <label>ID</label> <input class="field_class" type="text" name="userID" value="<%out.println(u.getUserID());%>" readonly=""/>
-            <label>Email</label> <input class="field_class" type="text" name="email" value="<%out.println(u.getEmail());%>" required=""/>${errorEmail}</br>
-            <label>Phone</label> <input class="field_class" type="text" name="phone" value="<%out.println(u.getPhoneNumber());%>" required=""/> ${errorPhone}</br>
-            <label>Full Name</label> <input class="field_class" type="text" name="fullname" value="<%out.println(u.getFullName());%>" required=""/></br>
-            <label>Password</label> <input class="field_class" type="text" name="pass" value="<%out.println(u.getPass());%>" required=""/> </br>
-            <label>Identity No</label> <input class="field_class" type="text" name="identity" value="<%out.println(u.getIdentityNumber());%>" required=""/> </br>
+            <label>ID</label> <input type="text" name="userID" value="<%out.println(u.getUserID());%>" readonly=""/>
+            <label>Email</label> <input type="text" name="email" value="<%out.println(u.getEmail());%>" required=""/>${errorEmail}</br>
+            <label>Phone</label> <input type="text" name="phone" value="<%out.println(u.getPhoneNumber());%>" required=""/> ${errorPhone}</br>
+            <label>Full Name</label> <input  type="text" name="fullname" value="<%out.println(u.getFullName());%>" required=""/></br>
+            <label>Password</label> <input  type="text" name="pass" value="<%out.println(u.getPass());%>" required=""/> </br>
+            <label>Identity No</label> <input  type="text" name="identity" value="<%out.println(u.getIdentityNumber());%>" required=""/> </br>
 
             <button type="submit" onclick="POST">Update</button>
+            </div>
+            </div>
             </div>
         </form>
             </div>

@@ -146,9 +146,10 @@ public class employeeDAO implements ICrud<String, Employee> {
     }
     public  List<Employee> search(String search){
         try {
-            String sql = "select * from tb_Employee where fullname like ?";
+            String sql = "select * from tb_Employee where fullname like ? or email like ?";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             stmt.setString(1, search);
+            stmt.setString(2, search);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 String email = rs.getString("email");
@@ -159,11 +160,15 @@ public class employeeDAO implements ICrud<String, Employee> {
                 dm = new Employee(email, fullname, pass, identity ,AblockID);
                 listItems.add(dm);
             }
+
             return listItems;
+            
         } catch (SQLException e) {
             Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }
+    
+     
 
 }

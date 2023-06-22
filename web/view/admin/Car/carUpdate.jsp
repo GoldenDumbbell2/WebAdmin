@@ -59,18 +59,51 @@
                             </div>
 
         </nav>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
             <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row text-center pad-top">
-        <main>
+                
+      
             
-        <form id="login_form" class="form_class" action="CarUpdateController" method="POST">
+        <form action="CarUpdateController" method="POST">
             <div class="form_div">
+            <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
             <%Car c = (Car) request.getAttribute("car");%>
-            <label>CarID:</label><input  class="field_class"  type="text" name="id" value="<%out.println(c.getCarID());%>" readonly=""/> </br>
-            <label>Car Name:</label> <input  class="field_class"  type="text" name="name" value="<%out.println(c.getCarName());%>" required=""/> </br>
-            <label>Car Plate:</label> <input  class="field_class"  type="text" name="plate" value="<%out.println(c.getCarPlate());%>" required=""/> </br>
-            <label>Car Color:</label> <input  class="field_class"  type="text" name="color" value="<%out.println(c.getCarColor());%>" required=""/> </br>
+            <label>CarID:</label><input  type="text" name="id" value="<%out.println(c.getCarID());%>" readonly=""/> </br>
+            <label>Car Name:</label> <input type="text" name="name" value="<%out.println(c.getCarName());%>" required=""/> </br>
+            <label>Car Plate:</label> <input  type="text" name="plate" value="<%out.println(c.getCarPlate());%>" required=""/> </br>
+            <label>Car Color:</label> <input  type="text" name="color" value="<%out.println(c.getCarColor());%>" required=""/> </br>
             <% Family u = null;
             String userID;
                 if (c.getFamilyId()== null) {
@@ -79,15 +112,17 @@
                userID = c.getFamilyId().getFamilyName();
             }
             %>
-            <label>Family:<label><input  class="field_class"  type="text" name="familyId" value="<%out.println(userID);%>" readonly=""/> </br>   
+            <label>Family:</label> <input type="text" name="familyId" value="<%out.println(userID);%>"  required="" readonly=""/> </br>   
             
                    
             </div>
+            </div>
+            </div>
+            </div>
              <input type="submit" name="action" value="UPDATE"/>
         </form>
-            </main>
            
-            </div>
+            
             </div>
             </div>
     </body>

@@ -5,8 +5,11 @@
  */
 package controller;
 
+import dao.unverifyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,11 +34,22 @@ public class HomeController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    unverifyDAO dao = new unverifyDAO();
+    int noUnverify = 0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try {
+        noUnverify = dao.noUnverify();
+
+            request.setAttribute("noUnverify", Integer.toString(noUnverify));
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/admin.jsp");
         rd.forward(request, response);
+        } catch (IOException | ServletException e) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.ALL.SEVERE, null, e);
+        }
+        
     }
 
     /**
@@ -49,18 +63,15 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+        noUnverify = dao.noUnverify();
+
+            request.setAttribute("noUnverify", Integer.toString(noUnverify));
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/admin.jsp");
         rd.forward(request, response);
+        } catch (IOException | ServletException e) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.ALL.SEVERE, null, e);
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

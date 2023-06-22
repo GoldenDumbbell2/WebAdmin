@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,34 +10,31 @@ package model;
  * @author TADAR
  */
 public class Spot {
-    private String spotID;
-    private boolean available;
     private String sensorID;
+    private boolean available;  
+    private String location;
     private ApartmentBlock AblockID;
 
     public Spot() {
     }
 
-    public Spot(String spotID, boolean available, String sensorID) {
-        this.spotID = spotID;
-        this.available = available;
+    public Spot(String sensorID, boolean available, String location, ApartmentBlock AblockID) {
         this.sensorID = sensorID;
-    }
-
-    public Spot(String spotID, boolean available, String sensorID, ApartmentBlock AblockID) {
-        this.spotID = spotID;
         this.available = available;
-        this.sensorID = sensorID;
+        this.location = location;
         this.AblockID = AblockID;
     }
+    
 
-    public String getSpotID() {
-        return spotID;
+    public String getLocation() {
+        return location;
     }
 
-    public void setSpotID(String spotID) {
-        this.spotID = spotID;
+    public void setLocation(String location) {
+        this.location = location;
     }
+
+
 
     public boolean isAvailable() {
         return available;

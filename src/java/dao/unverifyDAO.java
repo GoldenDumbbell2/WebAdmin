@@ -24,6 +24,7 @@ public class unverifyDAO {
     
     private DBContext db;
     familyDAO familyDAO;
+     int noUnverify;
 
     private List<Car> listItems;
 
@@ -41,6 +42,7 @@ public class unverifyDAO {
         listItems = new ArrayList<>();
         db = new DBContext();
         familyDAO = new familyDAO();
+        int noUnverify;
     }
 
 
@@ -59,9 +61,9 @@ public class unverifyDAO {
      public List<Car> readUnverify(){
         listItems.clear();
         try {
-            String sql = "select * from tb_Car where verifyState1=?";
+            String sql = "select * from tb_Car where verifyState1 IS NULL and carPaperFront IS NOT NULL and carPaperBack IS NOT NULL";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
-             stmt.setString(1, "FALSE");
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String carID = rs.getString("carID");
@@ -77,6 +79,7 @@ public class unverifyDAO {
                     dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
                 }else{
                 dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
+                listItems.add(dm);
                 }
                 
                 
@@ -86,5 +89,40 @@ public class unverifyDAO {
             Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
+    }
+     
+     public int noUnverify(){
+        
+        try {
+            String sql = "select * from tb_Car where verifyState1 IS NULL and carPaperFront IS NOT NULL and carPaperBack IS NOT NULL";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            
+            noUnverify = 0;
+            while (rs.next()) {
+                String carID = rs.getString("carID");
+                String carname = rs.getString("carName");
+                String carPlate = rs.getString("carPlate");
+                String carColor = rs.getString("carColor");
+                String carPaperFront = rs.getString("carPaperFront");
+                String carPaperBack = rs.getString("carPaperBack");
+                boolean verifyState1 = rs.getBoolean("verifyState1");
+                boolean verifyState2 = rs.getBoolean("verifyState2");
+                Family family = familyDAO.details(rs.getString("familyId"));
+                if (family == null) {
+                    dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
+                }else{
+                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
+                noUnverify++;
+                }
+                
+                
+            }
+            return noUnverify;
+        } catch (SQLException e) {
+            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
     }
 }

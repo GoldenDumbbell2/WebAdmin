@@ -1,5 +1,4 @@
 
-<%@page import="model.Users"%>
 <%@page import="model.Car"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.History"%>
@@ -45,9 +44,7 @@
                     <li>
                         <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
                     </li>
-                    <li class="active-link">
-                        <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>
-                    </li>
+                    
                     
                    
                 </ul>
@@ -60,19 +57,18 @@
     <table class="fl-table" >
             <thead>
                 <tr>
-                    <th>CarID</th>
                     <th>CarName</th>
                     <th>CarPlate</th>
                     <th>CarColor</th>
                     <th>Paper Front</th>
                     <th>Paper Back</th>
-                    <th>Verify</th>
+                    <th>Action</th>
                     
                 </tr>
             </thead>
             <tbody>
                 <%
-                    List<Car> ds = (ArrayList<Car>) request.getAttribute("list");
+                   List<Car> ds = (ArrayList<Car>) request.getAttribute("list");
                 %>
 
                 <%
@@ -80,27 +76,23 @@
                 %>
                 <tr>
                     <td>
-                        <%=x.getCarID()%>
-                    </td>
-                    <td>
                         <%=x.getCarName()%>
                     </td>
                     <td>
                        <%=x.getCarPlate()%>
-                    </td>
+                    </td>           
                     <td>
                         <%=x.getCarColor()%>
                     </td>
                     <td>
-                       <%=x.getCarPaperFront()%>
+                        <img src="<%=x.getCarPaperFront()%>" height="50" width="50">
                     </td>
                     <td>
-                       <%=x.getCarPaperBack()%>
+                        <img src="<%=x.getCarPaperBack()%>" height="50" width="50">
                     </td>
                     <td>
-                        <a> verify </a>
+                        <a href="CarVerifyController?id=<%=x.getCarID()%>"> Verify </a>
                     </td>
- 
                 </tr>
                 <%
                     }
