@@ -16,6 +16,8 @@ public class Users {
     private String fullName;
     private String pass;
     private String identityNumber;
+    private boolean role;
+    private boolean familyVerify;
     private Family familyId;
 
     public Users() {
@@ -39,6 +41,43 @@ public class Users {
         this.pass = pass;
         this.identityNumber = identityNumber;
     }
+
+    public Users(String userID, String email, String phoneNumber, String fullName, String identityNumber) {
+        this.userID = userID;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.fullName = fullName;
+        this.identityNumber = identityNumber;
+    }
+    
+
+    public Users(String userID, String email, String fullName, String phone, boolean role, boolean familyVerify, Family familyId) {
+        this.userID = userID;
+        this.email = email;
+        this.fullName = fullName;
+        this.role = role;
+        this.familyVerify = familyVerify;
+        this.familyId = familyId;
+        this.phoneNumber = phone;
+    }
+
+    public boolean isRole() {
+        return role;
+    }
+
+    public void setRole(boolean role) {
+        this.role = role;
+    }
+    
+    public boolean isFamilyVerify() {
+        return familyVerify;
+    }
+
+    public void setFamilyVerify(boolean familyVerify) {
+        this.familyVerify = familyVerify;
+    }
+    
+    
     
 
     public String getUserID() {

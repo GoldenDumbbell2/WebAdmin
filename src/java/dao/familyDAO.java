@@ -24,8 +24,10 @@ import util.DBContext;
 public class familyDAO {
      private DBContext db;
     ApartmentBlockDAO AblockID;
+    Users user;
 
     private List<Family> listItems;
+    private List<Users> listUser;
 
     public DBContext getDb() {
         return db;
@@ -47,6 +49,7 @@ public class familyDAO {
 
     public familyDAO() {
         listItems = new ArrayList<>();
+        listUser = new ArrayList<>();
         db = new DBContext();
         AblockID = new ApartmentBlockDAO();
     }
@@ -102,6 +105,61 @@ public class familyDAO {
             return dm;
         } catch (SQLException e) {
             Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+    
+    public List<Family> search(String FamilyID) {
+     listItems.clear();
+        try {
+            String sql = "select * from tb_Family where familyId like ?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, FamilyID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String familyID = rs.getString("familyId");
+                String familyName = rs.getString("familyName");
+                ApartmentBlock apartmentBlock = AblockID.details(rs.getString("AblockID"));
+                dm = new Family(familyID, familyName, apartmentBlock);
+                listItems.add(dm);
+            }
+            return listItems;
+        } catch (SQLException e) {
+            Logger.getLogger(familyDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+    public Family addOwner(String familyID, String UserID) {
+       try {
+            String sql = "update tb_Users set familyId=?, familyVerify=1, roleUser=1 where userID=?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, familyID);
+            stmt.setString(2, UserID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(familyDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+     public List<Users> readOwner() {
+     listUser.clear();
+        try {
+            String sql = "select * from tb_Users where familyId is null";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String useID = rs.getString("userID");
+                String email = rs.getString("email");
+                String phoneNo = rs.getString("phoneNumber");
+                String fullname = rs.getString("fullname");
+                String identitynumber = rs.getString("identitiCard");
+               
+                 user = new Users(useID, email, phoneNo, fullname, identitynumber);
+                listUser.add(user);
+            }
+            return listUser;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }

@@ -8,7 +8,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                
                     <li>
                         <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
                     </li>
@@ -53,7 +53,7 @@
         </nav>
       <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row text-center pad-top">
+               <div style="height: 250px; width: 100%; overflow-y:auto;">
     <table class="fl-table" >
             <thead>
                 <tr>
@@ -99,6 +99,7 @@
                 %> 
             </tbody>
         </table>
+               </div>
     </main>
 
             

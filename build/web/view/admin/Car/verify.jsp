@@ -8,7 +8,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -43,6 +44,9 @@
                 
                     <li>
                         <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
+                    </li>
+                    <li>
+                        <a href="CarUnverifyViewController" ><i class="fa fa-backward "></i>Back</a>
                     </li>
                     
                     

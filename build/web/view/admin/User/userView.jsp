@@ -13,7 +13,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer</title>
+        <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -56,18 +57,51 @@
                     <li>
                         <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>
                     </li>
+                    
                    
                    
                 </ul>
                             </div>
 
         </nav>
+                         <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
+
              <div id="page-wrapper" >
             <div id="page-inner">
                 <form action="UserSearchController" method="GET">
-        <input class="field_class" type="text" name="search" value="" required=""/><button>Search</button>
+        <input type="text" name="search" value="" required=""/><input type="submit" name="action" value="Search"/>
                     </form>
-               </br>
+               
+               <div style="height: 250px; width: 100%; overflow-y:auto;">
         <table class="fl-table">
         
             <thead>
@@ -81,7 +115,10 @@
                   
                 </tr>
             </thead>
+            
             <tbody>
+                        
+
                 <%
                     List<Users> ds = (ArrayList<Users>) request.getAttribute("list");
                 %>
@@ -116,12 +153,18 @@
                     }
                 %> 
                        
-
+                            
             </tbody>
+            
              </table>
-                       <form action="UserCreateController" >
-            <button>Create</button>
-        </form>
+               </div>
+                       
+                <form action="UserCreateController" method="GET">
+            <input type="submit" name="action" value="Create"/>
+                    </form>
+                <form action="UserviewController" method="GET">
+            <input type="submit" name="action" value="Refresh"/>
+                    </form>
                 
         </main>
         

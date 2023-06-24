@@ -19,6 +19,8 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
     </head>
     <body>
     <main>
@@ -45,14 +47,11 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                 
-                    <li >
-                        <a href="EmployeeViewController" method="GET"><i class="fa fa-table "></i>Employee Account Table</a>
-                    </li>
-                    <li >
-                        <a href="UserviewController" method="GET"><i class="fa fa-table "></i>Customer Account Table</a>
+                    <li>
+                        <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
                     </li>
                     <li>
-                        <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>
+                        <a href="CarViewController" ><i class="fa fa-backward "></i>Back</a>
                     </li>
                    
                 </ul>

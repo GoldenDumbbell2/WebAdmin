@@ -11,9 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin</title>
+        <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Responsive Admin</title>
+    
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -129,19 +130,20 @@
                       </a>
                       </div>     
                   </div>
-           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-                      <div class="div-square">
-                           <a href="" method="">
- <i class="fa fa-clipboard fa-5x" ></i>
-            <h4>Payment History List</h4>
-                      </a>
-                      </div>     
-                  </div>
+           
            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
                            <a href="BookingViewController" method="GET">
  <i class="fa fa-clipboard fa-5x" ></i>
             <h4>Customer Booking List</h4>
+                      </a>
+                      </div>     
+                  </div>
+                      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                      <div class="div-square">
+                           <a href="familyViewController" method="GET">
+ <i class="fa fa-clipboard fa-5x" ></i>
+            <h4>Family Management</h4>
                       </a>
                       </div>     
                   </div>

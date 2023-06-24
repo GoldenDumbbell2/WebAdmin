@@ -22,6 +22,7 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <link rel="shortcut icon" href="assets/img/logo.png"/>
     </head>
     <body>
         
@@ -61,6 +62,7 @@
         
           <div id="page-wrapper" >
             <div id="page-inner">
+               
                 
                 <form action="BookingSearchController" method="GET">
         <input class="field_class" type="text" name="search" value="" required=""/><button>Search</button>
@@ -69,7 +71,7 @@
                 
                     
     <table class="fl-table">
-        
+        <div id="table-wrapper">
             <thead>
                 <tr>
                     <th>CarPlate</th>
@@ -120,6 +122,7 @@
                      
 
             </tbody>
+            </div>
         </table>
                       </div>
     </div>

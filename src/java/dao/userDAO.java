@@ -184,6 +184,55 @@ public class userDAO implements ICrud<String, Users> {
         }
         return null;
     }
+     public List<Users> readFamily(String fID) {
+     listItems.clear();
+        try {
+            String sql = "select * from tb_Users where familyId like ?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, fID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String useID = rs.getString("userID");
+                String email = rs.getString("email");
+                String fullname = rs.getString("fullname");
+                String phone = rs.getString("phoneNumber");
+                boolean role = rs.getBoolean("roleUser");
+                boolean familyVerify = rs.getBoolean("roleUser");
+                Family family = familyID.details(rs.getString("familyId"));
+                dm = new Users(useID, email, fullname, phone,  role, familyVerify, family);
+                listItems.add(dm);
+            }
+            return listItems;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+     public Users detailsOwner(String fID) {
+       try {
+           dm = new Users();
+            String sql = "select * from tb_Users where familyId=? and roleUser=1 and roleUser is not null";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, fID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String useID = rs.getString("userID");
+                String email = rs.getString("email");
+                String phoneNo = rs.getString("phoneNumber");
+                String fullname = rs.getString("fullname");
+                String pass = rs.getString("pass");
+                String identitynumber = rs.getString("identitiCard");
+                 Family family = familyID.details(rs.getString("familyId"));
+               
+                dm = new Users(useID, email, phoneNo, fullname, pass, identitynumber, family);
+
+            }
+            return dm;
+        } catch (SQLException e) {
+            Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
 
    
 }

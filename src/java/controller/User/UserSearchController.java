@@ -8,6 +8,7 @@ package controller.User;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,11 +35,13 @@ public class UserSearchController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
       private final userDAO dao = new userDAO();
+      List<Users> list = new ArrayList<>();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
      String search = request.getParameter("search");
-        List<Users> list = dao.search(search);
+        list.clear();
+        list = dao.search(search);
         request.setAttribute("list", list);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/User/userView.jsp");
         rd.forward(request, response);

@@ -13,7 +13,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update</title>
+        <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
          <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -85,6 +86,9 @@ label{
                     </li>
                     <li>
                         <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>
+                    </li>
+                    <li>
+                        <a href="EmployeeViewController" ><i class="fa fa-backward "></i>Back</a>
                     </li>
                    
                 </ul>

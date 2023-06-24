@@ -72,6 +72,7 @@ public class EmployeeCreateController extends HttpServlet {
         if(validation){
             Employee em = new Employee(email, fullname, pass, identityNumber,a);
             emdao.create(em);
+            list.clear();
         List<Employee> list = emdao.read();
         request.setAttribute("list", list);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/Employee/employeeView.jsp");

@@ -10,7 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+       <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -41,6 +42,7 @@
             </div>
         </div>
             
+            
             <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
@@ -54,7 +56,9 @@
                     <li>
                         <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>
                     </li>
-                   
+                   <li>
+                        <a href="UserviewController" ><i class="fa fa-backward "></i>Back</a>
+                    </li>
                 </ul>
                             </div>
 

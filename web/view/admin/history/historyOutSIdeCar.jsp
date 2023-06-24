@@ -14,7 +14,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="shortcut icon" href="assets/img/logo.png"/>
+   <title>ADMIN WEB APPLICATION</title>
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -63,15 +64,48 @@
                             </div>
 
         </nav>
+                                 <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #214761;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+label{
+    left: 0px;
+}
+
+</style>
+
         
           <div id="page-wrapper" >
             <div id="page-inner">
                 
                 <form action="HistoryOutSearchController" method="GET">
-        <input class="field_class" type="text" name="search" value="" required=""/><button>Search</button>
+        <input class="field_class" type="text" name="search" value="" required=""/><input type="submit" name="action" value="Search"/>
                     </form>
                 
-                <div class="row text-center pad-top">
+              
+                                   <div style="height: 300px; width: 100%; overflow-y:auto;">
+
     <table class="fl-table">
             <thead>
                 <tr>
@@ -116,6 +150,7 @@
 
             </tbody>
         </table>
+                                   </div>
                       </div>
     </div>
 
