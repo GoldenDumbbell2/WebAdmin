@@ -29,6 +29,7 @@ public class spotDAO{
     
     private DBContext db;
     ApartmentBlockDAO Ablock;
+    carDAO cardao;
 
     public DBContext getDb() {
         return db;
@@ -45,6 +46,7 @@ public class spotDAO{
         listSpot = new ArrayList<>();
         db = new DBContext();
         Ablock = new ApartmentBlockDAO();
+        cardao = new carDAO();
     }
 
     public spotDAO(List<Spot> listSpot) {
@@ -70,9 +72,14 @@ public class spotDAO{
                 boolean available = rs.getBoolean("available");
                 String location = rs.getString("location");
                 ApartmentBlock AblockID = Ablock.details(rs.getString("AblockID"));
-               
-               
-                dm = new Spot(spotID, available, location, AblockID);
+                String car = rs.getString("carID");
+                boolean owned = rs.getBoolean("owned");
+                if (car == ""){
+                    dm = new Spot(spotID, available, location, AblockID, "null" ,owned);
+                }
+                else{
+                dm = new Spot(spotID, available, location, AblockID, car,owned);
+                }
                 listSpot.add(dm);
             }
             return listSpot;
@@ -81,6 +88,58 @@ public class spotDAO{
         }
         return null;
     }
+    
+      public int NoSpot() {
+       listSpot.clear();
+        try {int no= 0;
+            String sql = "select * from tb_Spot";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String spotID = rs.getString("sensorID");
+                boolean available = rs.getBoolean("available");
+                String location = rs.getString("location");
+                ApartmentBlock AblockID = Ablock.details(rs.getString("AblockID"));
+                String car = rs.getString("carID");
+                boolean owned = rs.getBoolean("owned");
+                if (owned != true){
+                    if(available == false){
+                        no++;
+                    }
+                }
+            }
+            return no;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
+    }
+      
+      public int NoAvailable() {
+       listSpot.clear();
+        try {int no= 0;
+            String sql = "select * from tb_Spot";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String spotID = rs.getString("sensorID");
+                boolean available = rs.getBoolean("available");
+                String location = rs.getString("location");
+                ApartmentBlock AblockID = Ablock.details(rs.getString("AblockID"));
+                String car = rs.getString("carID");
+                boolean owned = rs.getBoolean("owned");
+                if (available == true){
+                        no++;
+                    
+                }
+            }
+            return no;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
+    }
+    
 
     public Spot details(String spotId) {
          try {

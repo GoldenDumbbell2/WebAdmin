@@ -85,6 +85,27 @@ public class userDAO implements ICrud<String, Users> {
         }
         return null;
     }
+    public List<Users> readWallet() {
+     listItems.clear();
+        try {
+            String sql = "select * from tb_Users";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String useID = rs.getString("userID");
+                String email = rs.getString("email");
+                String fullname = rs.getString("fullname");
+                String wallet = rs.getString("wallet");
+               
+                dm = new Users(useID, email, fullname, wallet);
+                listItems.add(dm);
+            }
+            return listItems;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
 
     @Override
     public Users details(String userID) {
@@ -115,14 +136,15 @@ public class userDAO implements ICrud<String, Users> {
     @Override
     public void create(Users newUser) {
          try {
-            String sql = "insert into tb_Users(userID, email, phoneNumber, fullname, pass, identitiCard) values(?, ?, ?, ?, ?, ?)";
+            String sql = "insert into tb_Users(userID, email, phoneNumber, fullname, pass, wallet, identitiCard) values(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             stmt.setString(1, newUser.getUserID());
             stmt.setString(2, newUser.getEmail());
             stmt.setString(3, newUser.getPhoneNumber());
             stmt.setString(4, newUser.getFullName());
             stmt.setString(5, newUser.getPass());
-            stmt.setString(6, newUser.getIdentityNumber());        
+            stmt.setString(6, "0");
+            stmt.setString(7, newUser.getIdentityNumber());        
             stmt.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -145,6 +167,17 @@ public class userDAO implements ICrud<String, Users> {
             Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    public void updateWallet(Users edittedUser) {
+        try {
+            String sql = "update tb_Users set wallet=? where email=?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(2, edittedUser.getEmail());
+            stmt.setString(1, edittedUser.getWallet());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 
     @Override
     public void delete(String id) {
@@ -152,7 +185,7 @@ public class userDAO implements ICrud<String, Users> {
             String sql = "delete tb_Users where userID=?";
             PreparedStatement stmt = db.getConn().prepareStatement(sql); 
             stmt.setString(1,id);
-            stmt.executeUpdate();   
+            stmt.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -176,6 +209,32 @@ public class userDAO implements ICrud<String, Users> {
                 Family family = familyID.details(rs.getString("familyId"));
                
                 dm = new Users(useID, email, phoneNo, fullname, pass, identitynumber, family);
+                listItems.add(dm);
+            }
+            return listItems;
+        } catch (SQLException e) {
+            Logger.getLogger(employeeDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+      public List<Users> searchWallet(String search) {
+     listItems.clear();
+        try {
+            String sql = "select * from tb_Users where fullname like ? or email like ?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, search);
+            stmt.setString(2, search);
+            
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String useID = rs.getString("userID");
+                String email = rs.getString("email");
+                String fullname = rs.getString("fullname");
+                String waller = rs.getString("wallet");
+               
+                dm = new Users(useID, email, fullname, waller);
+
+         
                 listItems.add(dm);
             }
             return listItems;
@@ -208,6 +267,29 @@ public class userDAO implements ICrud<String, Users> {
         }
         return null;
     }
+     public Users detailsWaller(String uID) {
+       try {
+           dm = new Users();
+            String sql = "select * from tb_Users where userID=?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, uID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String useID = rs.getString("userID");
+                String email = rs.getString("email");
+                String fullname = rs.getString("fullname");
+                String waller = rs.getString("wallet");
+               
+                dm = new Users(useID, email, fullname, waller);
+
+            }
+            return dm;
+        } catch (SQLException e) {
+            Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+
      public Users detailsOwner(String fID) {
        try {
            dm = new Users();

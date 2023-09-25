@@ -40,7 +40,7 @@ public class HistorySearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String search = request.getParameter("search");
-        List<History> list = dao.searchPlate(search);
+        List<History> list = dao.search(search);
         request.setAttribute("listHistory", list);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/history/history.jsp");
         rd.forward(request, response);

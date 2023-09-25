@@ -38,14 +38,14 @@ public class CarCreateController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
      private final carDAO cardao = new carDAO();
-    private final familyDAO familydao = new familyDAO();
-    private java.util.List<Family> listfamily = new ArrayList<>();
+    private final userDAO udao = new userDAO();
+    private java.util.List<Users> listUser = new ArrayList<>();
     private java.util.List<Car> listCar = new ArrayList<>();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        listfamily = familydao.read();
-        request.setAttribute("listfamily", listfamily);
+        listUser = udao.read();
+        request.setAttribute("listuser", listUser);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/Car/carCreate.jsp");
         rd.forward(request, response);
     }
@@ -65,8 +65,9 @@ public class CarCreateController extends HttpServlet {
         String ten = request.getParameter("name");
         String plate = request.getParameter("plate");
         String color = request.getParameter("color");
-        Family family = new Family();
-        listfamily = familydao.read();
+        String userID = request.getParameter("email");
+        Users userid = new Users();
+        userid = udao.details(userID);
         listCar = cardao.read();
         
         int newCarID = 0;
@@ -78,15 +79,10 @@ public class CarCreateController extends HttpServlet {
         }
         
         
-        for (Family u : listfamily) {
-            if (request.getParameter("familyID").equals(u.getFamilyID())) {
-                family = u;
-            }
-        }
         boolean validation = true;
         if(validation){
          String id =  Integer.toString(newCarID);
-        Car cn = new Car(id, ten, plate, color, family);
+        Car cn = new Car(id, ten, plate, color, userid);
         cardao.create(cn);
         List<Car> list = cardao.read();
         request.setAttribute("list", list);

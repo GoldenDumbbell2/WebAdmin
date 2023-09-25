@@ -19,6 +19,7 @@ public class Users {
     private boolean role;
     private boolean familyVerify;
     private Family familyId;
+    private String wallet;
 
     public Users() {
     }
@@ -59,6 +60,27 @@ public class Users {
         this.familyVerify = familyVerify;
         this.familyId = familyId;
         this.phoneNumber = phone;
+    }
+
+    public Users(String userID, String email, String fullName, String wallet) {
+        this.userID = userID;
+        this.email = email;
+        this.fullName = fullName;
+        this.wallet = wallet;
+    }
+
+    public Users(String email, String wallet) {
+        this.email = email;
+        this.wallet = wallet;
+    }
+    
+
+    public String getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(String wallet) {
+        this.wallet = wallet;
     }
 
     public boolean isRole() {

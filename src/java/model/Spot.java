@@ -14,6 +14,8 @@ public class Spot {
     private boolean available;  
     private String location;
     private ApartmentBlock AblockID;
+    private String carID;
+    boolean owned;
 
     public Spot() {
     }
@@ -24,6 +26,34 @@ public class Spot {
         this.location = location;
         this.AblockID = AblockID;
     }
+
+    public Spot(String sensorID, boolean available, String location, ApartmentBlock AblockID, String carID, boolean owned) {
+        this.sensorID = sensorID;
+        this.available = available;
+        this.location = location;
+        this.AblockID = AblockID;
+        this.carID = carID;
+        this.owned = owned;
+    }
+
+    public String getCarID() {
+        return carID;
+    }
+
+    public void setCarID(String carID) {
+        this.carID = carID;
+    }
+    
+    
+        
+    public boolean isOwned() {
+        return owned;
+    }
+
+    public void setOwned(boolean owned) {
+        this.owned = owned;
+    }
+    
     
 
     public String getLocation() {

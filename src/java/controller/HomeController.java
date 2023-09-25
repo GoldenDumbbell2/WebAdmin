@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.spotDAO;
 import dao.unverifyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +36,7 @@ public class HomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     unverifyDAO dao = new unverifyDAO();
+    spotDAO sdao = new spotDAO();
     int noUnverify = 0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +44,13 @@ public class HomeController extends HttpServlet {
         
         try {
         noUnverify = dao.noUnverify();
+        int no = sdao.NoSpot();
+        int noCar = sdao.NoAvailable();
 
             request.setAttribute("noUnverify", Integer.toString(noUnverify));
+            request.setAttribute("noSpot", Integer.toString(no));
+            request.setAttribute("noCar", Integer.toString(noCar));
+            
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/admin.jsp");
         rd.forward(request, response);
         } catch (IOException | ServletException e) {

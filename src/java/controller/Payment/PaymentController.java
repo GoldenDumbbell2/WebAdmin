@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.History;
+package controller.Payment;
 
-import dao.historyDAO;
+import dao.paymentDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,40 +15,41 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.History;
+import model.Payment;
 
 /**
  *
  * @author TADAR
  */
-@WebServlet(name = "HistoryOutSearchController", urlPatterns = {"/HistoryOutSearchController"})
-public class HistoryOutSearchController extends HttpServlet {
+@WebServlet(name = "PaymentController", urlPatterns = {"/PaymentController"})
+public class PaymentController extends HttpServlet {
 
-     private final historyDAO dao = new historyDAO();
-
-
+    private final paymentDAO dao = new paymentDAO();
+    List<Payment> list= new ArrayList<>();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String search = request.getParameter("search");
-        List<History> list = dao.searchPlate(search);
-        request.setAttribute("listHistory", list);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/history/historyOutSIdeCar.jsp");
+       list.clear();
+        list = dao.readPayment();
+        request.setAttribute("list", list);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/Payment/paymentHistory.jsp");
         rd.forward(request, response);
-    }
-
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+        
     }
 
     /**
-     * Returns a short description of the servlet.
+     * Handles the HTTP <code>POST</code> method.
      *
-     * @return a String containing servlet description
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    
+    }
 
 
 }

@@ -78,7 +78,11 @@
                   String fID = (String) request.getAttribute("ID");
                   fID.toUpperCase();
                 %>
+                <div class="col-lg-12 ">
+                        <div class="alert alert-info">
                 <h1> Family : <%=(fID)%> </h1>
+                </div>
+                </div>
                 <table class="fl-table">
                     <thead>
                 <tr>

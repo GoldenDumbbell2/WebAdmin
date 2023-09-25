@@ -53,11 +53,9 @@
                     <li>
                         <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
                     </li>
-                    <li>
-                        <a href="HistoryController" ><i class="fa fa-table "></i>Resident's History </a>
-                    </li>
+                    
                     <li class="active-link">
-                        <a href="HistoryOutSideCarController" ><i class="fa fa-table "></i>Foreigner's History </a>
+                        <a href="HistoryOutSideCarController" ><i class="fa fa-table "></i>I-O History </a>
                     </li>
                     
                 </ul>
@@ -119,8 +117,7 @@ label{
             <tbody>
                 <%
                     List<History> ds = (ArrayList<History>) request.getAttribute("listHistory");
-                // Setting the pattern
-                   SimpleDateFormat simpleformat = new SimpleDateFormat("MMMM dd /yyyy, hh:mm:ss");
+                
 
                 %>
 
@@ -134,10 +131,10 @@ label{
                        <%=(x.getCarPlate())%>
                     </td>
                     <td>
-                        <%=(simpleformat.format(x.getTime_In()))%>
+                        <%=(x.getTime_In())%>
                     </td>
                     <td>
-                        <%=(simpleformat.format(x.getTime_Out()))%>
+                        <%=(x.getTime_Out())%>
                     </td>
                    
                     
@@ -145,14 +142,20 @@ label{
                 <%
                      
                 }
+
                 %> 
-                      </div>
 
             </tbody>
         </table>
+                      
                                    </div>
+                      <form action="HistoryOutSideCarController" method="GET">
+       <input type="submit" name="action" value="Reset"/>
+                    </form>
                       </div>
     </div>
+                        </main>
+
 
            
     </body>

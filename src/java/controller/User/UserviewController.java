@@ -42,7 +42,7 @@ public class UserviewController extends HttpServlet {
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/User/userView.jsp");
         rd.forward(request, response);
         } catch (IOException | ServletException e) {
-            Logger.getLogger(HistoryController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserviewController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     

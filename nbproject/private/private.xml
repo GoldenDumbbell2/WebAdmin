@@ -12,8 +12,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Project/SPS_Admin2/web/view/login.jsp</file>
-            <file>file:/C:/Project/SPS_Admin2/web/style.css</file>
+            <file>file:/C:/Project/SPS_Admin2/src/java/controller/Bundle/bundleUpdateController.java</file>
+            <file>file:/C:/Project/SPS_Admin2/web/view/admin/Bundle/bundleUpdate.jsp</file>
+            <file>file:/C:/Project/SPS_Admin2/web/view/admin/User/userWallet.jsp</file>
+            <file>file:/C:/Project/SPS_Admin2/src/java/dao/spotDAO.java</file>
+            <file>file:/C:/Project/SPS_Admin2/src/java/controller/HomeController.java</file>
+            <file>file:/C:/Project/SPS_Admin2/web/view/admin/admin.jsp</file>
+            <file>file:/C:/Project/SPS_Admin2/src/java/controller/LoginController.java</file>
+            <file>file:/C:/Project/SPS_Admin2/src/java/controller/User/UserWalletUpdateController.java</file>
+            <file>file:/C:/Project/SPS_Admin2/web/view/admin/Bundle/bundle.jsp</file>
         </group>
     </open-files>
 </project-private>

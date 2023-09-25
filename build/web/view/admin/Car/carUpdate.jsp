@@ -103,15 +103,15 @@ label{
             <label>Car Name:</label> <input type="text" name="name" value="<%out.println(c.getCarName());%>" required=""/> </br>
             <label>Car Plate:</label> <input  type="text" name="plate" value="<%out.println(c.getCarPlate());%>" required=""/> </br>
             <label>Car Color:</label> <input  type="text" name="color" value="<%out.println(c.getCarColor());%>" required=""/> </br>
-            <% Family u = null;
+            <% Users u = null;
             String userID;
-                if (c.getFamilyId()== null) {
+                if (c.getUserId()== null) {
              userID = "null";
             }else{
-               userID = c.getFamilyId().getFamilyName();
+               userID = c.getUserId().getFullName();
             }
             %>
-            <label>Family:</label> <input type="text" name="familyId" value="<%out.println(userID);%>"  required="" readonly=""/> </br>   
+            <label>Email:</label> <input type="text" name="familyId" value="<%out.println(userID);%>"  required="" readonly=""/> </br>   
             
                    
             </div>

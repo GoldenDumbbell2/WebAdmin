@@ -74,13 +74,11 @@ public class unverifyDAO {
                 String carPaperBack = rs.getString("carPaperBack");
                 boolean verifyState1 = rs.getBoolean("verifyState1");
                 boolean verifyState2 = rs.getBoolean("verifyState2");
-                Family family = familyDAO.details(rs.getString("familyId"));
-                if (family == null) {
-                    dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
-                }else{
-                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
+              
+               
+                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
                 listItems.add(dm);
-                }
+                
                 
                 
             }
@@ -109,13 +107,10 @@ public class unverifyDAO {
                 String carPaperBack = rs.getString("carPaperBack");
                 boolean verifyState1 = rs.getBoolean("verifyState1");
                 boolean verifyState2 = rs.getBoolean("verifyState2");
-                Family family = familyDAO.details(rs.getString("familyId"));
-                if (family == null) {
-                    dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
-                }else{
-                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
+                
+                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
                 noUnverify++;
-                }
+                
                 
                 
             }

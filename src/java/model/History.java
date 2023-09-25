@@ -53,12 +53,6 @@ public class History {
         this.amount = amount;
         this.carID = carID;
     }
-
-
-
-
-    
-
   
     public String getCarPlate() {
         return carPlate;

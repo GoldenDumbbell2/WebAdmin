@@ -6,6 +6,7 @@
 
 
 
+<%@page import="model.Users"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
@@ -104,11 +105,13 @@ label{
         <label>  Car Name: </label> <input  type="text" name="name" required=""/></br>
         <label>  Car Plate:</label> <input type="text" name="plate" required=""/></br>
         <label>  Car Color:</label> <input type="text" name="color" required=""/></br>
-           
-          <label>Family</label> <select name="familyID">
+        <%
+             List<Users> listuser = (ArrayList<Users>) request.getAttribute("listuser");
+           %>
+          <label>User</label> <select name="email">
                 <option value = "NULL"></option>
-                <c:forEach var="item" items="${listfamily}">
-                    <option value="${item.getFamilyID()}">${item.getFamilyID()}</option>
+                <c:forEach var="item" items="${listuser}">
+                    <option value="${item.getUserID()}">${item.getEmail()}</option>
                 </c:forEach>
             </select>
           </div>

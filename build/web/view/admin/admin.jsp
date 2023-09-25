@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="model.Admin"%>
 <%@page import="model.Car"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,8 +25,12 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     </head>
+            
     <body>
-        <%String i = (String) request.getAttribute("noUnverify");%>
+        <%String i = (String) request.getAttribute("noUnverify");
+        String s = (String) request.getAttribute("noSpot");
+        String c = (String) request.getAttribute("noCar");
+%>
         <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
@@ -65,7 +70,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     <h2>ADMIN DASHBOARD</h2>   
+                        <h2>ADMIN DASHBOARD </h2>   <h2> Spots Left <%out.println(s);%></h2> <h2> Car In: <%out.println(c);%></h2>
                     </div>
                 </div>              
                  <!-- /. ROW  -->
@@ -73,7 +78,7 @@
                 <div class="row">
                     <div class="col-lg-12 ">
                         <div class="alert alert-info">
-                            
+
                             <strong>Welcome!</strong>
                         </div>
                        
@@ -122,31 +127,37 @@
                       </div>     
                   </div>
            
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            
+                       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
                            <a href="HistoryController" method="GET">
- <i class="fa fa-clipboard fa-5x" ></i>
-            <h4>Vehicle I-O History</h4>
+ <i class="fa fa-history fa-5x" ></i>
+            <h4>Car's In-Out History</h4>
                       </a>
                       </div>     
                   </div>
            
-           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+          
+                      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
-                           <a href="BookingViewController" method="GET">
- <i class="fa fa-clipboard fa-5x" ></i>
-            <h4>Customer Booking List</h4>
+                           <a href="familyViewController" method="GET">
+ <i class="fa fa-home fa-5x" ></i>
+            <h4>Family Management</h4>
                       </a>
                       </div>     
                   </div>
                       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
-                           <a href="familyViewController" method="GET">
- <i class="fa fa-clipboard fa-5x" ></i>
-            <h4>Family Management</h4>
+                           <a href="SpotController" method="GET">
+ <i class="fa fa-square fa-5x" ></i>
+
+            <h4>Parking Spots List</h4>
                       </a>
                       </div>     
                   </div>
+                      
+                      
+                      
                          </div>
                    </div>
             </div>

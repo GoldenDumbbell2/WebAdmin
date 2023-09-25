@@ -26,6 +26,7 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     </head>
+    
     <body>
         <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">

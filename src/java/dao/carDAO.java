@@ -27,6 +27,7 @@ public class carDAO  implements ICrud<String, Car> {
 
     private DBContext db;
     familyDAO familyDAO;
+    userDAO udao;
 
     private List<Car> listItems;
 
@@ -44,6 +45,7 @@ public class carDAO  implements ICrud<String, Car> {
         listItems = new ArrayList<>();
         db = new DBContext();
         familyDAO = new familyDAO();
+        udao = new userDAO();
     }
 
 
@@ -62,7 +64,7 @@ public class carDAO  implements ICrud<String, Car> {
     public List<Car> read(){
         listItems.clear();
         try {
-            String sql = "select * from tb_Car  where verifyState1 is not null and verifyState2 is not null ";
+            String sql = "select * from tb_Car  where verifyState1 is not null and userID is not null ";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -74,11 +76,11 @@ public class carDAO  implements ICrud<String, Car> {
                 String carPaperBack = rs.getString("carPaperBack");
                 boolean verifyState1 = rs.getBoolean("verifyState1");
                 boolean verifyState2 = rs.getBoolean("verifyState2");
-                Family family = familyDAO.details(rs.getString("familyId"));
-                if (family == null) {
+                Users userID = udao.details(rs.getString("userID"));
+                if (userID == null) {
                     dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
                 }else{
-                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
+                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2,userID);
                 }
                 listItems.add(dm);
             }
@@ -105,12 +107,13 @@ public class carDAO  implements ICrud<String, Car> {
                 String carPaperBack = rs.getString("carPaperBack");
                 boolean verifyState1 = rs.getBoolean("verifyState1");
                 boolean verifyState2 = rs.getBoolean("verifyState2");
-                Family family = familyDAO.details(rs.getString("familyId"));
-                if (family == null) {
+                Users userID = udao.details(rs.getString("userID"));
+                if (userID == null) {
                     dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
                 }else{
-                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
+                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2,userID);
                 }
+                listItems.add(dm);
                
             }
             return dm;
@@ -123,7 +126,7 @@ public class carDAO  implements ICrud<String, Car> {
     @Override
     public void create(Car newItem) {
         try {
-            String sql = "insert into tb_Car(carID, carName, carPlate, carColor, familyId) values(?, ?, ?, ?, ?)";
+            String sql = "insert into tb_Car(carID, carName, carPlate, carColor, verifyState1 , verifyState2, userID) values(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = db.getConn().prepareStatement(sql);
                        
 
@@ -131,7 +134,9 @@ public class carDAO  implements ICrud<String, Car> {
             stmt.setString(2, newItem.getCarName());
             stmt.setString(3, newItem.getCarPlate());
             stmt.setString(4, newItem.getCarColor());
-            stmt.setString(5, newItem.getFamilyId().getFamilyID());
+            stmt.setString(5, "true");
+            stmt.setString(6, "false");
+            stmt.setString(7, newItem.getUserId().getUserID());
             stmt.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -167,6 +172,16 @@ public class carDAO  implements ICrud<String, Car> {
             Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    public void deleteUserCar(String userID) {
+        try {
+            String sql = "delete tb_Car where userID=?";
+            PreparedStatement stmt = db.getConn().prepareStatement(sql);
+            stmt.setString(1, userID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(carDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
      public  List<Car> search(String search){
         try {
             String sql = "select * from tb_Car where carPlate like ?";
@@ -182,14 +197,14 @@ public class carDAO  implements ICrud<String, Car> {
                 String carPaperBack = rs.getString("carPaperBack");
                 boolean verifyState1 = rs.getBoolean("verifyState1");
                 boolean verifyState2 = rs.getBoolean("verifyState2");
-                Family family = familyDAO.details(rs.getString("familyId"));
-                if (family == null) {
-                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
-                listItems.add(dm);
+                Users userID = udao.details(rs.getString("userID"));
+                if (userID == null) {
+                    dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2);
                 }else{
-                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2, family);
-                listItems.add(dm);
+                dm = new Car(carID, carname, carPlate, carColor, carPaperFront, carPaperBack, verifyState1, verifyState2,userID);
                 }
+                listItems.add(dm);
+               
                 
             }
             return listItems;

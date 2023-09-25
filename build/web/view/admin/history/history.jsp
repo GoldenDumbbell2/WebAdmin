@@ -4,6 +4,7 @@
     Author     : TADAR
 --%>
 
+<%@page import="java.sql.Timestamp"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.History"%>
@@ -54,11 +55,9 @@
                         <a href="HomeController" ><i class="fa fa-desktop "></i>Home</a>
                     </li>
                     <li  class="active-link" >
-                        <a href="HistoryController" ><i class="fa fa-table  "></i>Resident's History </a>
+                        <a href="HistoryController" ><i class="fa fa-history "></i> History </a>
                     </li>
-                    <li>
-                        <a href="HistoryOutSideCarController" ><i class="fa fa-table "></i>Foreigner's History </a>
-                    </li>
+                    
                     
                 </ul>
                             </div>
@@ -116,8 +115,7 @@ label{
             <tbody>
                 <%
                     List<History> ds = (ArrayList<History>) request.getAttribute("listHistory");
-                // Setting the pattern
-                   SimpleDateFormat simpleformat = new SimpleDateFormat("MMMM dd /yyyy, hh:mm:ss");
+
 
                 %>
 
@@ -127,13 +125,13 @@ label{
                 %>
                 <tr>
                     <td>
-                       <%=(x.getCarID().getCarPlate())%>
+                       <%=(x.getCarPlate())%>
                     </td>
                     <td>
-                        <%=(simpleformat.format(x.getTime_In()))%>
+                        <%=(x.getTime_In())%>
                     </td>
                     <td>
-                        <%=(simpleformat.format(x.getTime_Out()))%>
+                        <%=(x.getTime_Out())%>
                     </td>
                    
                     
@@ -147,7 +145,10 @@ label{
             </tbody>
         </table>
                                    </div>
-                      </div>
+           <form action="HistoryController" method="GET">
+       <input type="submit" name="action" value="Reset"/>
+                    </form>           
+          </div>
     </div>
 
            

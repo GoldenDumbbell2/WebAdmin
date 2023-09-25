@@ -25,6 +25,7 @@
    <link rel="shortcut icon" href="assets/img/logo.png"/>
    <title>ADMIN WEB APPLICATION</title>
     </head>
+    
     <body>
    <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">
@@ -105,7 +106,7 @@ label{
                     </form>
                 
                 <main>
-                                   <div style="height: 250px; width: 100%; overflow-y:auto;">
+                                   <div style="height: 300px; width: 100%; overflow-y:auto;">
 
     <table class="fl-table">
             <thead>
@@ -138,18 +139,16 @@ label{
                     <td>
                         <%=x.getCarColor()%>
                     </td>
-                    <% Users u = null;
-            String familyID;
-                if (x.getFamilyId()== null) {
-             familyID = "null";
+                    <% 
+            String userName;
+                if (x.getUserId() == null) {
+              userName = "No Owner";
             }else{
-               familyID = x.getFamilyId().getFamilyID();
+               userName = x.getUserId().getEmail();
             }
-                String v1;
-                
                  %>
                     <td>
-                       <%=(familyID)%>
+                       <%=(userName)%>
                     </td>
                     <td>
                        <%=(x.isVerifyState1())%>
@@ -172,9 +171,7 @@ label{
             </main>
     </main>
 
-            <form action="CarCreateController" method="GET">
-            <input type="submit" name="action" value="Create"/>
-             </form>
+            
                 <form action="CarViewController" method="GET">
             <input type="submit" name="action" value="Refresh"/>
                     </form>

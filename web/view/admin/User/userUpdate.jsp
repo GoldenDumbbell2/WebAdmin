@@ -51,7 +51,8 @@
                         <a href="EmployeeViewController" method="GET"><i class="fa fa-table "></i>Employee Account Table</a>
                     </li>
                     <li >
-                        <a href="UserviewController" method="GET"><i class="fa fa-table "></i>Customer Account Table</a>
+                        <a href="UserviewController" method="GET"><i class="fa fa-table "></i>Customer Account Table<
+                        /a>
                     </li>
                     <li>
                         <a href="CarViewController" method="GET"><i class="fa fa-table "></i>Customer Car Table</a>

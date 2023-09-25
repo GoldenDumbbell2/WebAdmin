@@ -34,9 +34,9 @@ public class HistoryOutSideCarController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-        list = dao.readOut();
+        list = dao.read();
         request.setAttribute("listHistory", list);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/history/historyOutSIdeCar.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/view/admin/history/history.jsp");
         rd.forward(request, response);
         } catch (IOException | ServletException e) {
             Logger.getLogger(HistoryOutSideCarController.class.getName()).log(Level.SEVERE, null, e);

@@ -45,8 +45,9 @@ public class adminDAO {
             while (rs.next()) {
                 String _tentaikhoan = rs.getString("adminID");
                 String _matkhau = rs.getString("adpassword");
+                boolean _role = rs.getBoolean("roleAdmin");
                 
-                admin = new Admin(_tentaikhoan, _matkhau);
+                admin = new Admin(_tentaikhoan, _matkhau,_role);
             }
             return admin;
         } catch (SQLException e) {
@@ -66,9 +67,10 @@ public class adminDAO {
             while (rs.next()) {
                 String _tentaikhoan = rs.getString("adminID");
                 String _matkhau = rs.getString("adpassword");
+                boolean _role = rs.getBoolean("roleAdmin");
                 
 
-                admin = new Admin(_tentaikhoan, _matkhau);
+                admin = new Admin(_tentaikhoan, _matkhau, _role);
             }
             return admin;
         } catch (SQLException e) {
@@ -76,4 +78,5 @@ public class adminDAO {
         }
         return null;
     }
+    
 }
